@@ -1,3 +1,5 @@
+infra/terraform/env/dev/.terraform*
+
 # Logs
 logs
 *.log
