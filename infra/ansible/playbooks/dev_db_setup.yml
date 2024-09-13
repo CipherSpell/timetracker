@@ -1,0 +1,38 @@
+- name: Setup local database for dev environment
+  hosts: development 
+  become: true
+
+  tasks:
+    - name: Generate terraform output.json
+      shell: terraform output -json 
+      args:
+        chdir: '../../terraform/env/dev/'
+      register: dev_db_tf_output
+
+      # TODO: There might be a prettier way to write this
+    - name: Parse and set facts from Terraform output
+      set_fact:
+        db_container_name: "{{ dev_db_tf_output.stdout | from_json | json_query('container_name.value')}}"
+        db_port: "{{ dev_db_tf_output.stdout | from_json | json_query('db_port.value')}}"  
+        db_name: "{{ dev_db_tf_output.stdout | from_json | json_query('db_name.value')}}" 
+        db_login_user: "{{ dev_db_tf_output.stdout | from_json | json_query('db_login_user.value')}}" 
+        db_login_password: "{{ dev_db_tf_output.stdout | from_json | json_query('db_login_password.value')}}" 
+
+    - name: Display all facts
+      debug:
+        msg:
+          - "db_name: {{ db_name }}"
+          - "db_port: {{ db_port }}"
+          - "db_login_user: {{ db_login_user }}"
+          - "db_login_password: {{ db_login_password }}"
+
+    # TODO: replace hard-coded container name (postgres_dev)
+    - name: Copy sql dump to docker container
+      command: docker cp ../../dump.sql postgres_dev:/tmp/dump.sql
+
+    - name: Import SQL dump file to postgres database
+      environment:
+       PGPASSWORD: "{{ db_login_password }}"
+      shell: |
+        docker exec -i {{ db_container_name }} psql -U {{ db_login_user }} -d {{ db_name }} -f /tmp/dump.sql
+
