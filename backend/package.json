@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "jest"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -16,5 +17,8 @@
     "morgan": "~1.9.1",
     "pg": "^8.12.0",
     "winston": "^3.14.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
