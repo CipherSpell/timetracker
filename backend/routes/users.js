@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { executeQuery, withTransaction } = require('../database/postgres');
 
 /**
   * req.body -- passed as body on POST request
@@ -10,18 +9,9 @@ const { executeQuery, withTransaction } = require('../database/postgres');
 router.post('/addUser', async (req, res) => {
   const id = req.body.id
 
-  let result;
-
-  try {
-    result = await executeQuery('SELECT * FROM periodic_table');
-
-  } catch (err) {
-    console.log(err);
-  }
-
   res
     .status(200)
-    .send(result);
+    .send(`User to be added: ${id}`);
 });
 
 module.exports = router;
