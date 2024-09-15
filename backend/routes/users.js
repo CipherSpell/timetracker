@@ -11,7 +11,7 @@ router.post('/addUser', async (req, res) => {
 
   res
     .status(200)
-    .send(`User with id=${id} added`);
+    .send(`User to be added: ${id}`);
 });
 
 module.exports = router;
