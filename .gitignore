@@ -1,3 +1,4 @@
 infra/terraform/env/dev/.terraform*
 infra/terraform/env/dev/terraform.tfstate*
 
+.DS_Store

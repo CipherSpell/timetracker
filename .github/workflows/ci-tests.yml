@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 jobs:
-  run-backend-tests:
+  run-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     
@@ -24,8 +24,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Run tests 
+      - name: Set up Node v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run backend tests
         run: |
           cd backend
           npm ci
           npm run test
+
+      - name: Test backend startup script
+        run: |
+          cd backend
+          npm start & 
+          npx wait-on http://localhost:8080
+          echo "Server is responsive"
+
+      - name: Test landing startup script
+        run: |
+          cd landing
+          npm ci
+          npm run build
+          npm start &
+          npx wait-on http://localhost:3000
+          echo "Landing is responsive"
