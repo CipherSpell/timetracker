@@ -15,38 +15,64 @@ concurrency:
 permissions:
   contents: read
 
+env:
+  NODE_VERSION: '20'
+
 jobs:
-  run-tests:
+  backend-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repo 
+        uses: actions/checkout@v4
 
-      - name: Set up Node v20
+      - name: Set up Node.js for backend 
         uses: actions/setup-node@v4
-        with:
-          node-version: 20
+        with: 
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install backend dependencies
+        run: npm ci
+        working-directory: backend
 
       - name: Run backend tests
-        run: |
-          cd backend
-          npm ci
-          npm run test
+        run: npm run test
+        working-directory: backend
 
-      - name: Test backend startup script
+      - name: Start backend server and wait for availability
         run: |
-          cd backend
-          npm start & 
+          npm start &
           npx wait-on http://localhost:8080
-          echo "Server is responsive"
+          echo "Backend server is responsive"
+        working-directory: backend
 
-      - name: Test landing startup script
+  landing-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repo 
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js for landing 
+        uses: actions/setup-node@v4
+        with: 
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: landing/package-lock.json
+
+      - name: Install landing dependencies
+        run: npm ci
+        working-directory: landing
+
+      - name: Build landing application
+        run: npm run build
+        working-directory: landing
+
+      - name: Start landing server and wait for availability
         run: |
-          cd landing
-          npm ci
-          npm run build
           npm start &
           npx wait-on http://localhost:3000
-          echo "Landing is responsive"
+          echo "Landing server is responsive"
+        working-directory: landing
