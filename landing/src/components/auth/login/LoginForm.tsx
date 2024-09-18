@@ -20,7 +20,7 @@ export const LoginForm: React.FC = () => {
         <div className="bg-black grid place-items-center h-screen">
             <div className="rounded-lg bg-stone-900 px-10 py-10 w-96">
                 <h2 className="text-white text-center text-2xl mb-12">
-                    Timekeeper
+                    Timetracker 
                 </h2>
                 {/* <form> */}
                 <div>
@@ -66,7 +66,7 @@ export const LoginForm: React.FC = () => {
                     <hr className="border-subtle my-8" />
                 </div>
                 {/* </form> */}
-                <Link href="/signup">
+                <Link href="/register">
                     <button className="bg-white rounded-md w-full text-sm py-1">
                         Sign up
                     </button>
