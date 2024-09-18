@@ -24,7 +24,7 @@ export const RegistrationForm: React.FC = () => {
                 <h2 className="text-white text-center text-2xl mb-12">
                     Timetracker 
                 </h2>
-                <form>
+                {/* <form> */}
                     <div>
                         <label className="text-white mb-2 block text-sm leading-none">
                             Email address
@@ -82,7 +82,7 @@ export const RegistrationForm: React.FC = () => {
                             Sign Up
                         </button>
                     </div>
-                </form>
+                {/* </form> */}
                 <hr className="border-subtle my-8" />
                 <Link href="/login">
                     <button className="bg-white rounded-md w-full text-sm py-1">
