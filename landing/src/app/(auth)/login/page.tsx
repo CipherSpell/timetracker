@@ -1,6 +1,6 @@
 "use server";
 
-import { LoginForm } from "@/src/components/LoginForm";
+import { LoginForm } from "@/src/components/auth/login/LoginForm";
 import React from "react";
 
 const Login = async () => {

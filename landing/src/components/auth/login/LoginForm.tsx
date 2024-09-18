@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Input } from "./Input";
+import { Input } from "../../Input";
 // import { login } from "./LoginActions";
 import Link from "next/link";
 
