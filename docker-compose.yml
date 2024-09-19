@@ -8,9 +8,9 @@ services:
       - "8080:8080"
     # TODO: Replace the hardcoded values with values from .env
     environment:
-      - POSTGRES_HOST=postgres
+      - POSTGRES_HOST=postgres_dev
       - POSTGRES_USER=dev_user
-      - POSTGRES_PASSWORD=temp
+      - POSTGRES_PASSWORD=test
       - POSTGRES_DB=timetracker
       - REDIS_HOST=redis
     command: npm start
@@ -36,7 +36,7 @@ services:
     container_name: postgres_dev
     environment:
       POSTGRES_USER: dev_user
-      POSTGRES_PASSWORD: temp
+      POSTGRES_PASSWORD: test
       POSTGRES_DB: timetracker
     ports:
       - "5432:5432"

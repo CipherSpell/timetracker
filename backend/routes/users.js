@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const User = require('../models/User');
 
 /**
   * req.body -- passed as body on POST request
@@ -7,7 +8,9 @@ const router = require('express').Router();
   * }
   */
 router.post('/addUser', async (req, res) => {
-  const id = req.body.id
+  const { email, username, password } = req.body; 
+
+  await User.addUser(email, username, password);
 
   res
     .status(200)
