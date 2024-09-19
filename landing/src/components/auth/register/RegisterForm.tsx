@@ -1,5 +1,8 @@
 'use client'
 
+//TODO: Change strings to pull from a json file
+//TODO: Add interactivity styling
+
 import React, { useState } from 'react'
 import { Input } from '../../Input'
 import Link from 'next/link'
