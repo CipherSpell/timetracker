@@ -1,9 +1,9 @@
 'use server'
 
-import { RegistrationForm } from "@/src/components/auth/register/RegisterForm"
+import { RegistrationForm } from '@/src/components/auth/register/RegisterForm'
 
 const Register = async () => {
-    return <RegistrationForm />
+  return <RegistrationForm />
 }
 
 export default Register
