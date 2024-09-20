@@ -42,7 +42,6 @@ CREATE TABLE public.users (
     password VARCHAR(255) NOT NULL,
     first_name VARCHAR(100),
     last_name VARCHAR(100),
-    date_of_birth DATE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -51,17 +50,17 @@ CREATE TABLE public.users (
 -- Data for Name: users; Type: TABLE DATA; Schema: public; 
 --
 
-COPY public.users (email, password, first_name, last_name, date_of_birth) FROM stdin;
-john.doe@example.com	$2a$10$abcdefghijklmnopqrstuv	John	Doe	1985-03-15
-jane.smith@example.com	$2a$10$vwxyzabcdefghijklmnopq	Jane	Smith	1990-07-22
-mike.johnson@example.com	$2a$10$pqrstuvwxyzabcdefghij	Mike	Johnson	1988-11-30
-sarah.williams@example.com	$2a$10$jklmnopqrstuvwxyzabcd	Sarah	Williams	1992-05-10
-david.brown@example.com	$2a$10$efghijklmnopqrstuvwxy	David	Brown	1983-09-18
-emily.taylor@example.com	$2a$10$zabcdefghijklmnopqrst	Emily	Taylor	1995-01-25
-robert.anderson@example.com	$2a$10$uvwxyzabcdefghijklmno	Robert	Anderson	1987-06-08
-lisa.martinez@example.com	$2a$10$nopqrstuvwxyzabcdefgh	Lisa	Martinez	1991-12-03
-william.jackson@example.com	$2a$10$hijklmnopqrstuvwxyzab	William	Jackson	1986-04-20
-olivia.white@example.com	$2a$10$cdefghijklmnopqrstuvw	Olivia	White	1993-08-12
+COPY public.users (email, password, first_name, last_name) FROM stdin;
+john.doe@example.com	$2a$10$abcdefghijklmnopqrstuv	John	Doe
+jane.smith@example.com	$2a$10$vwxyzabcdefghijklmnopq	Jane	Smith
+mike.johnson@example.com	$2a$10$pqrstuvwxyzabcdefghij	Mike	Johnson
+sarah.williams@example.com	$2a$10$jklmnopqrstuvwxyzabcd	Sarah	Williams
+david.brown@example.com	$2a$10$efghijklmnopqrstuvwxy	David	Brown
+emily.taylor@example.com	$2a$10$zabcdefghijklmnopqrst	Emily	Taylor
+robert.anderson@example.com	$2a$10$uvwxyzabcdefghijklmno	Robert	Anderson
+lisa.martinez@example.com	$2a$10$nopqrstuvwxyzabcdefgh	Lisa	Martinez
+william.jackson@example.com	$2a$10$hijklmnopqrstuvwxyzab	William	Jackson
+olivia.white@example.com	$2a$10$cdefghijklmnopqrstuvw	Olivia	White
 \.
 
 --

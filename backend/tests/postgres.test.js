@@ -15,8 +15,6 @@ jest.mock('pg', () => {
   return { Pool: jest.fn(() => mPool) };
 });
 
-const logger = require('winston');
-
 jest.mock('winston', () => {
   const mLogger = {
     info: jest.fn(),
@@ -47,16 +45,27 @@ describe('executeQuery', () => {
     mPool.connect.mockClear();
     mClient.query.mockClear();
     mClient.release.mockClear();
-    logger.info.mockClear();
-    logger.error.mockClear();
+    winston.info.mockClear();
+    winston.error.mockClear();
   });
 
   it('should execute query successfully', async () => {
-    const queryText = 'SELECT * FROM test_table';
+    const queryText = 'SELECT * FROM users';
     const params = [];
-    const mockResult = { rows: [{ id: 1, name: 'Test' }] };
+    const mockResult = { 
+      rows: [
+        { 
+          id: 1, 
+          email: 'test@example.com', 
+          password: 'hashedpassword', 
+          first_name: 'Test', 
+          last_name: 'User', 
+          created_at: '2023-06-01T00:00:00Z',
+          updated_at: '2023-06-01T00:00:00Z'
+        }
+      ] 
+    };
 
-    // Mocking the result of query execution
     mClient.query.mockResolvedValueOnce(mockResult);
     mPool.connect.mockResolvedValueOnce(mClient);
 
@@ -64,20 +73,31 @@ describe('executeQuery', () => {
 
     expect(mPool.connect).toHaveBeenCalled();
     expect(mClient.query).toHaveBeenCalledWith(queryText, params);
-    expect(result).toBe(mockResult);
+    expect(result).toEqual(mockResult);
     expect(mClient.release).toHaveBeenCalled();
 
-    expect(logger.info).toHaveBeenCalledWith(`Query executed successfully: ${queryText}`);
-    expect(logger.info).toHaveBeenCalledWith('Client released back to pool');
+    expect(winston.info).toHaveBeenCalledWith(`Query executed successfully: ${queryText}`);
+    expect(winston.info).toHaveBeenCalledWith('Client released back to pool');
   });
 
   it('should retry query on error', async () => {
-    const queryText = 'SELECT * FROM test_table';
-    const params = [];
+    const queryText = 'SELECT * FROM users WHERE id = $1';
+    const params = [1];
     const mockError = new Error('Test error');
-    const mockResult = { rows: [{ id: 1, name: 'Test' }] };
+    const mockResult = { 
+      rows: [
+        { 
+          id: 1, 
+          email: 'test@example.com', 
+          password: 'hashedpassword', 
+          first_name: 'Test', 
+          last_name: 'User', 
+          created_at: '2023-06-01T00:00:00Z',
+          updated_at: '2023-06-01T00:00:00Z'
+        }
+      ] 
+    };
 
-    // Mocking the query to fail first, then succeed
     mClient.query
       .mockRejectedValueOnce(mockError)
       .mockResolvedValueOnce(mockResult);
@@ -89,21 +109,21 @@ describe('executeQuery', () => {
     expect(mPool.connect).toHaveBeenCalled();
     expect(mClient.query).toHaveBeenNthCalledWith(1, queryText, params);
     expect(mClient.query).toHaveBeenNthCalledWith(2, queryText, params);
-    expect(result).toBe(mockResult);
+    expect(result).toEqual(mockResult);
     expect(mClient.release).toHaveBeenCalled();
 
-    expect(logger.error).toHaveBeenCalledWith(`Error executing query: ${queryText} - ${mockError.message}`);
-    expect(logger.info).toHaveBeenCalledWith(`Retrying query (3 retries left)`);
-    expect(logger.info).toHaveBeenCalledWith(`Query executed successfully: ${queryText}`);
-    expect(logger.info).toHaveBeenCalledWith('Client released back to pool');
+    expect(winston.error).toHaveBeenCalledWith(`Error executing query: ${queryText} - ${mockError.message}`);
+    expect(winston.info).toHaveBeenCalledWith(`Retrying query (3 retries left)`);
+    expect(winston.info).toHaveBeenCalledWith(`Query executed successfully: ${queryText}`);
+    expect(winston.info).toHaveBeenCalledWith('Client released back to pool');
   });
 
+
   it('should throw error after retries exhausted', async () => {
-    const queryText = 'SELECT * FROM test_table';
-    const params = [];
+    const queryText = 'SELECT * FROM users WHERE email = $1';
+    const params = ['nonexistent@example.com'];
     const mockError = new Error('Test error');
 
-    // Mocking the query to fail with the mock error each time it's called
     mClient.query.mockRejectedValue(mockError);
     mPool.connect.mockResolvedValueOnce(mClient);
 
@@ -113,9 +133,9 @@ describe('executeQuery', () => {
     expect(mClient.query).toHaveBeenCalledWith(queryText, params);
     expect(mClient.release).toHaveBeenCalled();
 
-    expect(logger.error).toHaveBeenCalledWith(`Error executing query: ${queryText} - ${mockError.message}`);
-    expect(logger.info).not.toHaveBeenCalledWith(expect.stringContaining('Retrying query'));
-    expect(logger.info).toHaveBeenCalledWith('Client released back to pool');
+    expect(winston.error).toHaveBeenCalledWith(`Error executing query: ${queryText} - ${mockError.message}`);
+    expect(winston.info).not.toHaveBeenCalledWith(expect.stringContaining('Retrying query'));
+    expect(winston.info).toHaveBeenCalledWith('Client released back to pool');
   });
 });
 
@@ -132,15 +152,15 @@ describe('withTransaction', () => {
     mPool.connect.mockClear();
     mClient.query.mockClear();
     mClient.release.mockClear();
-    logger.info.mockClear();
-    logger.error.mockClear();
+    winston.info.mockClear();
+    winston.error.mockClear();
   });
 
   it('should commit transaction on success', async () => {
     mPool.connect.mockResolvedValueOnce(mClient);
-    mClient.query.mockResolvedValue({});
+    mClient.query.mockResolvedValue({ rows: [] });
 
-    const transactionFunction = jest.fn().mockResolvedValue('Success');
+    const transactionFunction = jest.fn().mockResolvedValue({ rows: [{ id: 1, email: 'new@example.com' }] });
     const result = await withTransaction(transactionFunction);
 
     expect(mPool.connect).toHaveBeenCalled();
@@ -151,16 +171,16 @@ describe('withTransaction', () => {
     expect(mClient.query).toHaveBeenNthCalledWith(2, 'COMMIT');
     expect(mClient.release).toHaveBeenCalled();
 
-    expect(result).toBe('Success');
+    expect(result).toEqual({ rows: [{ id: 1, email: 'new@example.com' }] });
 
-    expect(logger.info).toHaveBeenCalledWith('Transaction started');
-    expect(logger.info).toHaveBeenCalledWith('Transaction committed');
-    expect(logger.info).toHaveBeenCalledWith('Client released back to pool');
+    expect(winston.info).toHaveBeenCalledWith('Transaction started');
+    expect(winston.info).toHaveBeenCalledWith('Transaction committed');
+    expect(winston.info).toHaveBeenCalledWith('Client released back to pool');
   });
 
   it('should rollback transaction on error', async () => {
     mPool.connect.mockResolvedValueOnce(mClient);
-    mClient.query.mockResolvedValue({});
+    mClient.query.mockResolvedValue({ rows: [] });
 
     const mockError = new Error('Test error');
     const transactionFunction = jest.fn().mockRejectedValue(mockError);
@@ -175,7 +195,8 @@ describe('withTransaction', () => {
     expect(mClient.query).toHaveBeenNthCalledWith(2, 'ROLLBACK');
     expect(mClient.release).toHaveBeenCalled();
 
-    expect(logger.error).toHaveBeenCalledWith(`Transaction rolled back due to error: ${mockError.message}`);
-    expect(logger.info).toHaveBeenCalledWith('Client released back to pool');
+    expect(winston.error).toHaveBeenCalledWith(`Transaction rolled back due to error: ${mockError.message}`);
+    expect(winston.info).toHaveBeenCalledWith('Client released back to pool');
   });
 });
+
