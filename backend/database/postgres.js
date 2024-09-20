@@ -46,7 +46,7 @@ async function executeQuery(queryText, params = [], client = null, retryCount = 
 
     logger.info(`Query executed successfully: ${queryText}`);
 
-    return res;
+    return res.rows;
   } catch (err) {
     // On failure, retry query until retryCount reaches 0
     logger.error(`Error executing query: ${queryText} - ${err.message}`);
@@ -83,7 +83,7 @@ async function withTransaction(transactionFunction) {
     await client.query('COMMIT');
     logger.info('Transaction committed');
 
-    return result;
+    return result.rows;
   } 
   catch (err) {
     await client.query('ROLLBACK');

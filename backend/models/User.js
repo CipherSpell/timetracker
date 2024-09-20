@@ -42,7 +42,25 @@ const getUser = async (userId) => {
   return result;
 }
 
+const getAllUsers = async () => {
+  let result;
+
+  try {
+    result = await pg.executeQuery(
+      `SELECT * FROM users;`
+    );
+  } catch(error) {
+    logger.log({
+      level: 'error',
+      message: error
+    });
+  }
+
+  return result;
+}
+
 module.exports = {
   addUser,
-  getUser
+  getUser,
+  getAllUsers
 }
