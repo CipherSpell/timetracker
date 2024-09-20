@@ -6,7 +6,7 @@ import { useState } from 'react'
 //   minutes?: number
 // }
 
-const Timetracker: React.FC<> = () => {
+const Timetracker: React.FC = () => {
   const [started, setStarted] = useState<boolean>(false)
   //   const [time, setTime] = useState<string>('00:00')
 
