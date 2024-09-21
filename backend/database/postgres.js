@@ -13,9 +13,9 @@ const logger = winston.createLogger({
 
 // TODO: replace with actual process.env.ENVVAR after testing
 const dbConfig = {
-  host: '127.0.0.1', 
+  host: 'postgres_dev', 
   port: '5432',
-  database: 'dev_db',
+  database: 'timetracker',
   user: 'dev_user',
   password: 'test',
   max: 20, // Maximum number of clients in the pool
