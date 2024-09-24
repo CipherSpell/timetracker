@@ -10,9 +10,9 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-const addUser = async (email, username, password) => {
-  const cmd = `INSERT INTO Users (email, username, password)
-               VALUES (${email}, ${username}, ${password})`;
+const addUser = async (email, password, firstName, lastName) => {
+  const cmd = `INSERT INTO Users (email, password, first_name, last_name)
+               VALUES ('${email}', '${password}', '${firstName}', '${lastName}')`;
 
   try {
     await pg.withTransaction(async (client) => {
