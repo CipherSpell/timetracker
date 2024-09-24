@@ -30,6 +30,7 @@ export const RegistrationForm: React.FC = () => {
             id='email'
             name='email'
             placeholder='john.doe@example.com'
+            type='email'
             onChange={(e) =>
               setFormInfo({
                 ...formInfo,
