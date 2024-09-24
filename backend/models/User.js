@@ -12,11 +12,13 @@ const logger = winston.createLogger({
 
 const addUser = async (email, password, firstName, lastName) => {
   const cmd = `INSERT INTO Users (email, password, first_name, last_name)
-               VALUES ('${email}', '${password}', '${firstName}', '${lastName}')`;
+               VALUES ($1, $2, $3, $4)`;
+
+  const params = [email, password, firstName, lastName];
 
   try {
     await pg.withTransaction(async (client) => {
-      await client.query(cmd);
+      await client.query(cmd, params);
     });
   } catch(error) {
     logger.log({
