@@ -25,13 +25,13 @@ router.get('/', async (req, res) => {
   * }
   */
 router.post('/addUser', async (req, res) => {
-  const { email, username, password } = req.body; 
+  const { email, password, firstName, lastName } = req.body; 
 
-  await User.addUser(email, username, password);
+  await User.addUser(email, password, firstName, lastName);
 
   res
     .status(200)
-    .send(`User to be added: ${id}`);
+    .send(`User added`);
 });
 
 module.exports = router;
