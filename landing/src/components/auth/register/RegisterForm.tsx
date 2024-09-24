@@ -9,14 +9,12 @@ import Link from 'next/link'
 
 interface FormData {
   email: string
-  username: string
   password: string
 }
 
 export const RegistrationForm: React.FC = () => {
   const [formInfo, setFormInfo] = useState<FormData>({
     email: '',
-    username: '',
     password: '',
   })
 
@@ -36,22 +34,6 @@ export const RegistrationForm: React.FC = () => {
               setFormInfo({
                 ...formInfo,
                 email: e.target.value,
-              })
-            }
-          />
-        </div>
-        <div>
-          <label className='text-white mb-2 block text-sm leading-none'>
-            Username
-          </label>
-          <Input
-            id='username'
-            name='username'
-            placeholder='username'
-            onChange={(e) =>
-              setFormInfo({
-                ...formInfo,
-                username: e.target.value,
               })
             }
           />

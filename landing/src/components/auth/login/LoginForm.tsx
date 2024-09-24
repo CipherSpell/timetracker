@@ -57,13 +57,13 @@ export const LoginForm: React.FC = () => {
         </div>
         <div>
           <button className='bg-white rounded-md w-full text-sm py-1'>
-            Sign in
+            Sign In
           </button>
           <hr className='border-subtle my-8' />
         </div>
         <Link href='/register'>
           <button className='bg-white rounded-md w-full text-sm py-1'>
-            Sign up
+            Sign Up
           </button>
         </Link>
       </div>
