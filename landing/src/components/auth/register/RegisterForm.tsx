@@ -15,14 +15,14 @@ interface FormData {
 }
 
 const initialState: State = {
-  errors: [],
+  errors: {
+    email: [''],
+    password: [''],
+  },
 }
 
 export const RegistrationForm: React.FC = () => {
-  const [state, formAction] = useFormState<State, FormData>(
-    createUser,
-    initialState
-  )
+  const [state, formAction] = useFormState(createUser, initialState)
   const [formInfo, setFormInfo] = useState<FormData>({
     email: '',
     password: '',
