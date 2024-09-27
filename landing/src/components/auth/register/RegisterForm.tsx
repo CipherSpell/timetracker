@@ -42,7 +42,6 @@ export const RegistrationForm: React.FC = () => {
               name='email'
               placeholder='john.doe@example.com'
               type='email'
-              required={true}
               onChange={(e) =>
                 setFormInfo({
                   ...formInfo,
@@ -87,10 +86,9 @@ export const RegistrationForm: React.FC = () => {
           aria-label='polite'
           aria-atomic='true'
         >
-          {state?.errors?.password &&
-            state?.errors.password?.map((error: string) => {
-              return <p key={'wee'}>{error}</p>
-            })}
+          {state?.errors.password?.map((error: string) => {
+            return <p key={'wee'}>{error}</p>
+          })}
         </div>
         <hr className='border-subtle my-8' />
         <Link href='/login'>

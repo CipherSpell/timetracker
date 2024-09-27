@@ -83,10 +83,9 @@ export const LoginForm: React.FC = () => {
               aria-label='polite'
               aria-atomic='true'
             >
-              {state?.errors?.password &&
-                state?.errors.password?.map((error: string) => {
-                  return <p key={'wee'}>{error}</p>
-                })}
+              {state?.errors.password?.map((error: string) => {
+                return <p key={'wee'}>{error}</p>
+              })}
             </div>
             <hr className='border-subtle my-8' />
           </div>
