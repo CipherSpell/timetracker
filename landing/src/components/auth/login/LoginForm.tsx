@@ -17,8 +17,8 @@ interface FormData {
 
 const initialState: State = {
   errors: {
-    email: [''],
-    password: [''],
+    email: [],
+    password: [],
   },
 }
 
@@ -28,6 +28,28 @@ export const LoginForm: React.FC = () => {
     email: '',
     password: '',
   })
+  const errors = state?.errors
+
+  const emailErrors = errors?.email?.length != 0 && (
+    <span className='mt-2 text-sm text-red-500'>
+      {errors?.email?.map((error: string, id: number) => {
+        return <p key={id}>{error}</p>
+      })}
+    </span>
+  )
+
+  const passwordErrors = errors?.password && (
+    <div
+      className='text-red-500'
+      id='error'
+      aria-label='polite'
+      aria-atomic='true'
+    >
+      {errors.password?.map((error: string, id: number) => {
+        return <p key={id}>{error}</p>
+      })}
+    </div>
+  )
 
   return (
     <div className='bg-black grid place-items-center h-screen'>
@@ -38,6 +60,7 @@ export const LoginForm: React.FC = () => {
             <label className='text-white mb-2 block text-sm leading-none'>
               Email address
             </label>
+            {emailErrors}
             <Input
               id='email'
               name='email'
@@ -77,16 +100,7 @@ export const LoginForm: React.FC = () => {
             >
               Sign In
             </button>
-            <div
-              className='text-red-500'
-              id='error'
-              aria-label='polite'
-              aria-atomic='true'
-            >
-              {state?.errors.password?.map((error: string) => {
-                return <p key={'wee'}>{error}</p>
-              })}
-            </div>
+            {passwordErrors}
             <hr className='border-subtle my-8' />
           </div>
         </form>
