@@ -16,8 +16,8 @@ interface FormData {
 
 const initialState: State = {
   errors: {
-    email: [''],
-    password: [''],
+    email: [],
+    password: [],
   },
 }
 
@@ -27,6 +27,28 @@ export const RegistrationForm: React.FC = () => {
     email: '',
     password: '',
   })
+  const errors = state?.errors
+
+  const emailErrors = errors?.email?.length != 0 && (
+    <span className='mt-2 text-sm text-red-500'>
+      {errors?.email?.map((error: string, id: number) => {
+        return <p key={id}>{error}</p>
+      })}
+    </span>
+  )
+
+  const passwordErrors = errors?.password?.length != 0 && (
+    <div
+      className='text-red-500'
+      id='error'
+      aria-label='polite'
+      aria-atomic='true'
+    >
+      {errors?.password?.map((error: string, id: number) => {
+        return <p key={id}>{error}</p>
+      })}
+    </div>
+  )
 
   return (
     <div className='bg-black grid place-items-center h-screen'>
@@ -37,6 +59,7 @@ export const RegistrationForm: React.FC = () => {
             <label className='text-white mb-2 block text-sm leading-none'>
               Email address
             </label>
+            {emailErrors}
             <Input
               id='email'
               name='email'
@@ -49,9 +72,6 @@ export const RegistrationForm: React.FC = () => {
                 })
               }
             />
-            <span className='mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block'>
-              Please enter a valid email address
-            </span>
           </div>
           <div>
             <label className='text-white mb-2 block text-sm leading-none'>
@@ -80,16 +100,7 @@ export const RegistrationForm: React.FC = () => {
             </button>
           </div>
         </form>
-        <div
-          className='text-red-500'
-          id='error'
-          aria-label='polite'
-          aria-atomic='true'
-        >
-          {state?.errors.password?.map((error: string) => {
-            return <p key={'wee'}>{error}</p>
-          })}
-        </div>
+        {passwordErrors}
         <hr className='border-subtle my-8' />
         <Link href='/login'>
           <button className='bg-white rounded-md w-full text-sm py-1'>
