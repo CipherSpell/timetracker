@@ -28,7 +28,7 @@ const addUser = async (email, password, firstName, lastName) => {
   }
 }
 
-const getUser = async (userId) => {
+const getUserbyId = async (userId) => {
   const cmd = `SELECT * FROM Users WHERE id = $1`;
   let result;
 
@@ -42,6 +42,20 @@ const getUser = async (userId) => {
   }
 
   return result;
+}
+
+const getUserbyEmail = async (email) => {
+  const cmd = `SELECT * from Users WHERE email = $1`;
+  let result;
+
+  try {
+    result = await pg.executeQuery(cmd, [email]);
+  } catch(error) {
+    logger.log({
+      level: 'error',
+      message: error
+    });
+  }
 }
 
 const getAllUsers = async () => {
@@ -64,5 +78,7 @@ const getAllUsers = async () => {
 module.exports = {
   addUser,
   getUser,
-  getAllUsers
+  getAllUsers,
+  getUserbyId,
+  getUserbyEmail
 }
