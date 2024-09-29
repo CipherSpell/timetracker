@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 // TODO: remove default once https://github.com/CipherSpell/timetracker/issues/14 is done 
 const JWT_SECRET = process.env.JWT_SECRET || 'PLACEHOLDER';
 
-export const authenticateJWT = (req, res, next) => {
+const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (authHeader && authHeader.startsWith('Bearer ')) {
@@ -21,3 +21,6 @@ export const authenticateJWT = (req, res, next) => {
   }
 };
 
+module.exports = {
+  authenticateJWT
+}
