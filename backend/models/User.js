@@ -68,7 +68,6 @@ const getAllUsers = async () => {
 
 module.exports = {
   addUser,
-  getUser,
   getAllUsers,
   getUserbyId,
   getUserbyEmail
