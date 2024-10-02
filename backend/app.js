@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
 const logger = require('./utilities/logger')
 const healthcheck = require('./utilities/healthcheck')
+const redis = require('./database/redis')
 
 const app = express()
 
@@ -46,5 +47,7 @@ async function redisHealthCheck() {
 }
 
 redisHealthCheck();
+
+redis.setWithExpiry('timer', '23', 1000);
 
 module.exports = app

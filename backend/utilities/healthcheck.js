@@ -2,7 +2,7 @@ const redis = require('../database/redis');
 const logger = require('./logger');
 
 async function pingRedis() {
-  const client = redis.getRedisConnection();
+  const client = await redis.getRedisConnection();
   
   try {
     const startTime = Date.now();
