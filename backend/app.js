@@ -43,7 +43,7 @@ logger.log({
 
 async function redisHealthCheck() {
   const response = await healthcheck.pingRedis();
-  logger.info(JSON.stringify(response, null, 2));
+  logger.info(`redis startup healthcheck: ${JSON.stringify(response, null, 2)}`);
 }
 
 redisHealthCheck();
