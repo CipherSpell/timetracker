@@ -2,19 +2,10 @@ const createError = require('http-errors')
 const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
-const winston = require('winston')
 const morgan = require('morgan')
+const logger = require('./utilities/logger')
 
 const app = express()
-
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.combine(
-    winston.format.colorize(),
-    winston.format.simple()
-  ),
-  transports: [new winston.transports.Console()],
-})
 
 logger.log({
   level: 'info',

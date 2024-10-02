@@ -1,14 +1,5 @@
 const pg = require('../database/postgres');
-const winston = require('winston');
-
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.combine(
-    winston.format.colorize(),
-    winston.format.simple()
-  ),
-  transports: [new winston.transports.Console()],
-});
+const logger = require('../utilities/logger')
 
 const addUser = async (email, password, firstName, lastName) => {
   const cmd = `INSERT INTO Users (email, password, first_name, last_name)
