@@ -90,8 +90,7 @@ async function deleteKey(key) {
   }
 }
 
-async function setKey(timer, userId, taskId, value) {
-  const key = `${timer}:${userId}:${taskId}`;
+async function setKey(key, value) {
   let client;
   try {
     client = await getRedisConnection();
