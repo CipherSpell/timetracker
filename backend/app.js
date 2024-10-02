@@ -4,6 +4,7 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
 const logger = require('./utilities/logger')
+const healthcheck = require('./utilities/healthcheck')
 
 const app = express()
 
@@ -38,5 +39,12 @@ logger.log({
   level: 'info',
   message: 'Server started...',
 })
+
+async function redisHealthCheck() {
+  const response = await healthcheck.pingRedis();
+  logger.info(JSON.stringify(response, null, 2));
+}
+
+redisHealthCheck();
 
 module.exports = app

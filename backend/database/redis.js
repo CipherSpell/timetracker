@@ -75,6 +75,7 @@ module.exports = {
   getOrDefault,
   deleteKey,
   setKey,
-  exec
+  exec,
+  getRedisConnection
 };
 
