@@ -1,9 +1,11 @@
+import { Input } from './Input'
+
 const Footer: React.FC = () => {
   return (
-    <footer className='w-full h-auto container'>
-      <div className='grid grid-cols-3'>
+    <footer className='w-full h-auto container p-2'>
+      <div className='grid grid-cols-3 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 md:gap-8'>
         <div>
-          <h2 className='font-bold'>Timetracker</h2>
+          <h2 className='font-bold text-2xl'>Timetracker</h2>
           <p className='text-sm mt-4'>Copyright &#169; 2024 Timetracker</p>
           <p className='text-sm mt-4 mb-6'>All rights reserved</p>
           <button className='focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-400 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center'>
@@ -24,13 +26,62 @@ const Footer: React.FC = () => {
         </div>
         <div className='flex flex-col'>
           <h2 className='font-bold'>Support</h2>
-          <a className='hover:underline hover:text-gray-500 leading-4 cursor-pointer mt-6'>
+          <a
+            className='hover:underline hover:text-gray-500 leading-4 cursor-pointer mt-6'
+            href='/terms-of-service'
+          >
             Terms of Services
           </a>
-          <a className='hover:underline hover:text-gray-500 leading-4 cursor-pointer mt-6'>
+          <a
+            className='hover:underline hover:text-gray-500 leading-4 cursor-pointer mt-6'
+            href='/privacy'
+          >
             Privacy Policy
           </a>
         </div>
+        <div>
+          <h2 className='font-bold'>Community</h2>
+        </div>
+        <div className='lg:block hidden'>
+          <h2 className='font-bold mb-2'>Contact Us</h2>
+          <label htmlFor='email' hidden>
+            email
+          </label>
+          <Input id='email' name='email' placeholder='Enter email' />
+          <label htmlFor='message' hidden>
+            Message
+          </label>
+          <textarea
+            id='message'
+            rows={3}
+            className='w-full rounded-md text-sm px-3 py-2 mb-4'
+            name='message'
+            placeholder='message'
+          ></textarea>
+          <button className='bg-blue-300 rounded-md w-full text-sm py-1'>
+            Submit
+          </button>
+        </div>
+      </div>
+      <div className='lg:hidden'>
+        <h2 className='font-bold mt-10 text-xl mb-2'>Contact Us</h2>
+        <label htmlFor='email' hidden>
+          email
+        </label>
+        <Input id='email' name='email' placeholder='Enter email' />
+        <label htmlFor='message' hidden>
+          Message
+        </label>
+        <textarea
+          id='message'
+          rows={3}
+          className='w-full rounded-md text-sm px-3 py-2 mb-4'
+          name='message'
+          placeholder='message'
+        ></textarea>
+        <button className='bg-blue-300 rounded-md w-full text-sm py-1'>
+          Submit
+        </button>
       </div>
     </footer>
   )
