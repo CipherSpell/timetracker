@@ -3,16 +3,19 @@ const Timer = require('../models/Timer');
 
 const logger = require('../utilities/logger');
 
+const EXISTS = 1;
+const NOT_EXISTS = 0;
+
 router.get('/', async (req, res) => {
   let payload = await Timer.exec('keys *');
   res.status(200).send(payload);
 });
 
-router.post('/setTimer', async (req, res) => {
+router.post('/start', async (req, res) => {
   const { task, user } = req.body;
   const timestamp = Date.now();
 
-  const key = `timer:${user}:${task}:timestamp`;
+  const key = `timer:${user}:${task}:start`;
 
   let status;
   let payload;
@@ -30,21 +33,67 @@ router.post('/setTimer', async (req, res) => {
   res.sendStatus(status);
 });
 
-router.get('/getTimerValue/:key', async (req, res) => {
-  const key = req.params.key;
-  let ;
+router.post('/pause', async (req, res) => {
+  const { task, user } = req.body;
+  const timestamp = Date.now();
+
+  let status;
+  let payload;
+
+  const key = `timer:${user}:${task}:duration`;
+
+  // If duration exists, we fetch the duration so far and
+  // sum with the new duration
+  let cachedDuration = 0;
+  const cachedDurationExists = await Timer.existsInCache(key);
+  
+  if(cachedDurationExists == EXISTS)
+    cachedDuration = await Timer.getValue(key);
+
+  const startTime = await Timer.getValue(`timer:${user}:${task}:start`);
+  const duration = cachedDuration + (timestamp - startTime);
+
+  logger.info(`Timestamp: ${timestamp}`);
+  logger.info(`startTime: ${startTime}`)
+
+  try {
+    await Timer.setWithExpiry(key, duration);
+    await Timer.delKey(`timer:${user}:${task}:start`);
+    status = 200; 
+  } catch(error) {
+    payload = error; 
+  }
+
+  if(payload)
+    res.status(status).send(payload);
+
+  res.sendStatus(status);
+});
+
+router.post('/stop', async (req, res) => {
+  const { task, user } = req.body;
+  const timestamp = Date.now();
+
+
+})
+
+router.get('/getTimerValue/:user/:task/:type', async (req, res) => {
+  const { user, task, type } = req.params;
+  const key = `timer:${user}:${task}:${type}`;
+
+  let payload;
   let status = 200;
 
   try {
-    payload = await Timer.getValue(key);
+    payload = {
+      value: await Timer.getValue(key)
+    }
   } catch(error) {
     status = 400;
     payload = error;
   }
 
-  res
-    .status(status)
-    .send(payload);
+  res.status(status).send(payload);
 })
 
 module.exports = router;

@@ -51,10 +51,23 @@ const exec = async (command) => {
   return result;
 }
 
+const existsInCache = async (key) => {
+  let result;
+
+  try {
+    result = await exec(`exists ${key}`);
+  } catch(error) {
+    logger.error(error);
+  }
+
+  return result;
+}
+
 module.exports = {
   setWithExpiry,
   getValue,
   delKey,
   setKey,
-  exec
+  exec,
+  existsInCache
 }
