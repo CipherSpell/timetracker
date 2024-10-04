@@ -4,11 +4,11 @@ const logger = require('../utilities/logger')
 
 // TODO: replace with actual process.env.ENVVAR after testing
 const dbConfig = {
-  host: 'postgres_dev', 
-  port: '5432',
-  database: 'timetracker',
-  user: 'dev_user',
-  password: 'test',
+  host: process.env.POSTGRES_HOST, 
+  port: process.env.POSTGRES_PORT,
+  database: process.env.POSTGRES_DB,
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
   max: 20, // Maximum number of clients in the pool
   idleTimeoutMillis: 30000, // Close idle clients after 30s
   connectionTimeoutMillis: 2000, // Return an error after 2s if connection cannot be established
