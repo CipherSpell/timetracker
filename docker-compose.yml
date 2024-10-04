@@ -48,6 +48,13 @@ services:
   redis:
     image: redis:7.4-alpine
     container_name: redis_dev
+    command: >
+      redis-server
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+      --loglevel notice 
+      --timeout 300
+      --tcp-keepalive 60
     ports:
       - "6379:${REDIS_PORT}"
 
