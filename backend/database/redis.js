@@ -5,8 +5,8 @@ const { createPool } = require('generic-pool');
 const factory = {
   create: () => {
     return new Redis({
-      port: 6379,
-      host: 'redis_dev',
+      port: process.env.REDIS_PORT,
+      host: process.env.REDIS_HOST,
       db: 0 
     });
   },
