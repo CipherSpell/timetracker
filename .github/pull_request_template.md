@@ -28,4 +28,4 @@ Link any related issues here. Use GitHub keywords to automatically close the iss
 Include screenshots that may help reviewers understand the changes.
 
 ## Additional Notes
-Add any other context or information here, including potential risks, considerations, or next steps.
+Add any other context or information here, including potential risks, considerations, how to test and next steps.
