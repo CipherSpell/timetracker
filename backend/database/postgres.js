@@ -6,9 +6,9 @@ const logger = require('../utilities/logger')
 const dbConfig = {
   host: process.env.POSTGRES_HOST, 
   port: process.env.POSTGRES_PORT,
-  database: process.env.POSTGRES_DATABASE,
+  database: process.env.POSTGRES_DB,
   user: process.env.POSTGRES_USER,
-  password: process.env.POSTGRESS_PASSWORD,
+  password: process.env.POSTGRES_PASSWORD,
   max: 20, // Maximum number of clients in the pool
   idleTimeoutMillis: 30000, // Close idle clients after 30s
   connectionTimeoutMillis: 2000, // Return an error after 2s if connection cannot be established
