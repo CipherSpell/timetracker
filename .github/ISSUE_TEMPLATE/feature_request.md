@@ -1,32 +1,34 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: "[FR]"
-labels: enhancement
-assignees: ''
-
+name: "Feature Implementation"
+about: "Request the implementation of a new feature or enhancement"
+title: "[FR] "
+labels: "enhancement"
+assignees: ""
 ---
 
-## Summary
-*Provide a brief summary of the feature you are requesting. Describe it in one or two sentences so the team can quickly understand what the feature is about.*
+## Description
+*Provide a brief overview of the feature that needs to be implemented. Include the purpose of the feature and how it will benefit the application*
 
-## Problem Statement
-*Describe the problem you are facing that this feature would solve. Explain why this feature is important or what challenges you are trying to address. Consider including any data, user feedback, or scenarios that demonstrate the problem.*
+## Acceptance Criteria
+*List the requirements that must be met for this feature to be considered complete. Be as specific as possible to help developers understand the desired outcome*
 
-***Questions to consider:***
-- *What user problem or need does this feature solve?*
-- *How does the lack of this feature affect you?*
+- [ ] *Describe the functionality or endpoint that should be added*
+- [ ] *Specify expected status codes or outputs if applicable*
+- [ ] *Define any dependencies or services that need to be checked or used*
+- [ ] *Include a sample response or output if relevant:*
 
-## Proposed Solution
-*Describe the solution or feature you'd like to see. Be as detailed as possible and include any specifics, such as:*
-- *What it should look like*
-- *How it should behave*
-- *Any settings or configuration options needed*
+    ```json
+    {
+      "exampleKey": "exampleValue"
+    }
+    ```
+
+## Technical Details
+*Provide any technical information or guidelines needed to implement the feature.*
+
+- ***Location**: Specify where the new code should be added (e.g., in a specific directory or module)*
+- ***Dependencies**: Mention any external systems, services, or libraries that this feature depends on*
+- ***Notes**: Any other implementation notes that may help developers working on this task*
 
 ## Additional Context
-*Add any other context or screenshots about the feature request here. This could include links to relevant discussions, references to similar features from other projects, or anything else that might help the team understand your request.*
-
-***Questions to consider:***
-- *Are there any specific examples of other projects that implemented a similar feature?*
-- *Is there any technical context or limitations the team should be aware of?*
-- *Are there visual examples (screenshots, wireframes, mockups) that might help?*
+*Add any other context, links, or screenshots that would help understand the feature better*
