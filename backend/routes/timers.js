@@ -7,23 +7,24 @@ const EXISTS = 1;
 const NOT_EXISTS = 0;
 
 const getDuration = async (user, task) => {
-  const key = `timer:${user}:${task}:duration`;
+  const durationKey = `timer:${user}:${task}:duration`;
+  const startKey = `timer:${user}:${task}:start`;
   const timestamp = Date.now();
 
-  // If duration exists, we fetch the duration so far and
-  // sum with the new duration
   let cachedDuration = 0;
-  const cachedDurationExists = await Timer.existsInCache(key);
-  
-  if(cachedDurationExists == EXISTS)
-    cachedDuration = await Timer.getValue(key);
 
-  const startTime = await Timer.getValue(`timer:${user}:${task}:start`);
-  const duration = cachedDuration + (timestamp - startTime);
+  const cachedDurationExists = await Timer.existsInCache(durationKey);
+  if (cachedDurationExists === EXISTS)
+    cachedDuration = await Timer.getValue(durationKey);
 
-  return duration;
-}
+  const startTime = await Timer.getValue(startKey);
 
+  let duration = cachedDuration;
+  if (startTime)
+    duration += (timestamp - startTime);
+
+  return [durationKey, duration];
+};
 router.get('/', async (req, res) => {
   let payload = await Timer.exec('keys *');
   res.status(200).send(payload);
@@ -56,11 +57,15 @@ router.post('/start', async (req, res) => {
 router.post('/pause', async (req, res) => {
   const { task, user } = req.body;
   const timestamp = Date.now();
+  
+  logger.info(`task: ${task}, user: ${user}`)
 
   let status;
   let payload;
 
-  const duration = await getDuration(user, task);
+  const [key, duration] = await getDuration(user, task);
+
+  logger.info(`duration: ${duration}`);
 
   try {
     await Timer.setWithExpiry(key, duration);
@@ -89,7 +94,7 @@ router.post('/stop', async (req, res) => {
   const { task, user } = req.body;
   const timestamp = Date.now();
 
-  const duration = await getDuration(user, task.id);
+  const [key, duration] = await getDuration(user, task.id);
 
   const taskPayload = { 
     duration,
@@ -98,6 +103,8 @@ router.post('/stop', async (req, res) => {
 
   try {
     await Timer.saveTimer(taskPayload, user);
+    await Timer.delKey(`timer:${user}:${task.id}:start`);
+    await Timer.delKey(key);
   } catch(error) {
     logger.error(error);
     res.sendStatus(400);
