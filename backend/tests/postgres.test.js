@@ -58,8 +58,6 @@ describe('executeQuery', () => {
           id: 1, 
           email: 'test@example.com', 
           password: 'hashedpassword', 
-          first_name: 'Test', 
-          last_name: 'User', 
           created_at: '2023-06-01T00:00:00Z',
           updated_at: '2023-06-01T00:00:00Z'
         }
@@ -90,8 +88,6 @@ describe('executeQuery', () => {
           id: 1, 
           email: 'test@example.com', 
           password: 'hashedpassword', 
-          first_name: 'Test', 
-          last_name: 'User', 
           created_at: '2023-06-01T00:00:00Z',
           updated_at: '2023-06-01T00:00:00Z'
         }
