@@ -27,7 +27,7 @@ const getDuration = async (user, task) => {
 };
 router.get('/', async (req, res) => {
   let payload = await Timer.exec('keys *');
-  res.status(200).send(payload);
+  res.status(200).send({ payload });
 });
 
 // Returns a task/timer id
@@ -129,7 +129,7 @@ router.get('/getTimerValue/:user/:task/:type', async (req, res) => {
     payload = error;
   }
 
-  res.status(status).send(payload);
+  res.status(status).send({ payload });
 })
 
 module.exports = router;
