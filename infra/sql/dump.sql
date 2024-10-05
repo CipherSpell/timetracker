@@ -40,8 +40,6 @@ CREATE TABLE public.users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -50,17 +48,47 @@ CREATE TABLE public.users (
 -- Data for Name: users; Type: TABLE DATA; Schema: public; 
 --
 
-COPY public.users (email, password, first_name, last_name) FROM stdin;
-john.doe@example.com	$2a$10$abcdefghijklmnopqrstuv	John	Doe
-jane.smith@example.com	$2a$10$vwxyzabcdefghijklmnopq	Jane	Smith
-mike.johnson@example.com	$2a$10$pqrstuvwxyzabcdefghij	Mike	Johnson
-sarah.williams@example.com	$2a$10$jklmnopqrstuvwxyzabcd	Sarah	Williams
-david.brown@example.com	$2a$10$efghijklmnopqrstuvwxy	David	Brown
-emily.taylor@example.com	$2a$10$zabcdefghijklmnopqrst	Emily	Taylor
-robert.anderson@example.com	$2a$10$uvwxyzabcdefghijklmno	Robert	Anderson
-lisa.martinez@example.com	$2a$10$nopqrstuvwxyzabcdefgh	Lisa	Martinez
-william.jackson@example.com	$2a$10$hijklmnopqrstuvwxyzab	William	Jackson
-olivia.white@example.com	$2a$10$cdefghijklmnopqrstuvw	Olivia	White
+COPY public.users (email, password) FROM stdin;
+john.doe@example.com	$2a$10$abcdefghijklmnopqrstuv
+jane.smith@example.com	$2a$10$vwxyzabcdefghijklmnopq
+mike.johnson@example.com	$2a$10$pqrstuvwxyzabcdefghij
+sarah.williams@example.com	$2a$10$jklmnopqrstuvwxyzabcd
+david.brown@example.com	$2a$10$efghijklmnopqrstuvwxy
+emily.taylor@example.com	$2a$10$zabcdefghijklmnopqrst
+robert.anderson@example.com	$2a$10$uvwxyzabcdefghijklmno
+lisa.martinez@example.com	$2a$10$nopqrstuvwxyzabcdefgh
+william.jackson@example.com	$2a$10$hijklmnopqrstuvwxyzab
+olivia.white@example.com	$2a$10$cdefghijklmnopqrstuvw
+\.
+
+--
+-- Name: timers; Type: TABLE; Schema: public;
+--
+
+CREATE TABLE public.timers (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES public.users(id),
+    duration BIGINT NOT NULL, -- Duration in milliseconds
+    description TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+--
+-- Data for Name: timers; Type: TABLE DATA; Schema: public;
+--
+
+COPY public.timers (user_id, duration, description) FROM stdin;
+1	3600000	"Worked on project Alpha"
+2	1800000	"Meeting with client"
+3	7200000	"Development tasks"
+1	2700000	"Code review"
+4	10800000	"Design session"
+5	5400000	"Bug fixing"
+2	9000000	"Feature implementation"
+3	3600000	"Testing"
+4	1800000	"Documentation"
+5	7200000	"Deployment tasks"
 \.
 
 --

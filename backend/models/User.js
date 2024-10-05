@@ -1,9 +1,9 @@
 const pg = require('../database/postgres');
 const logger = require('../utilities/logger')
 
-const addUser = async (email, password, firstName, lastName) => {
-  const cmd = `INSERT INTO Users (email, password, first_name, last_name)
-               VALUES ($1, $2, $3, $4)`;
+const addUser = async (email, password) => {
+  const cmd = `INSERT INTO Users (email, password)
+               VALUES ($1, $2)`;
 
   const params = [email, password, firstName, lastName];
 
