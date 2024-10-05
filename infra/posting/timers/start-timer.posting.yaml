@@ -1,0 +1,12 @@
+name: start timer
+method: POST
+url: http://localhost:8080/timers/start
+body:
+  content: |-
+    {
+      "user": 1,
+      "task": 1
+    }
+headers:
+- name: Content-Type
+  value: application/json
