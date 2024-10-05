@@ -4,8 +4,7 @@ url: http://localhost:8080/timers/start
 body:
   content: |-
     {
-      "user": 1,
-      "task": 1
+      "user": 10
     }
 headers:
 - name: Content-Type
