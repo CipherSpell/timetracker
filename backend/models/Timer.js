@@ -1,4 +1,5 @@
 const redis = require('../database/redis');
+const pg = require('../database/postgres');
 const logger = require('../utilities/logger');
 
 const FOUR_HOURS = 14400;
@@ -63,11 +64,28 @@ const existsInCache = async (key) => {
   return result;
 }
 
+const saveTimer = async (timer, userId) => {
+  const { duration, description } = timer;
+  const cmd = `INSERT INTO timers (user_id, duration, description)
+               VALUES ($1, $2, $3)`;
+
+  const params = [userId, duration, description];
+
+  try {
+    await pg.withTransaction(async (client) => {
+      await client.query(cmd, params);
+    });
+  } catch(error) {
+    logger.error(error);
+  }
+}
+
 module.exports = {
   setWithExpiry,
   getValue,
   delKey,
   setKey,
   exec,
-  existsInCache
+  existsInCache,
+  saveTimer
 }
