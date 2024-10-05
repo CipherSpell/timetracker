@@ -16,9 +16,9 @@ router.get('/', async (req, res) => {
   * }
   */
 router.post('/addUser', async (req, res) => {
-  const { email, password, firstName, lastName } = req.body; 
+  const { email, password } = req.body; 
 
-  await User.addUser(email, password, firstName, lastName);
+  await User.addUser(email, password);
 
   res
     .status(200)

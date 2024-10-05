@@ -40,8 +40,6 @@ CREATE TABLE public.users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -51,16 +49,16 @@ CREATE TABLE public.users (
 --
 
 COPY public.users (email, password, first_name, last_name) FROM stdin;
-john.doe@example.com	$2a$10$abcdefghijklmnopqrstuv	John	Doe
-jane.smith@example.com	$2a$10$vwxyzabcdefghijklmnopq	Jane	Smith
-mike.johnson@example.com	$2a$10$pqrstuvwxyzabcdefghij	Mike	Johnson
-sarah.williams@example.com	$2a$10$jklmnopqrstuvwxyzabcd	Sarah	Williams
-david.brown@example.com	$2a$10$efghijklmnopqrstuvwxy	David	Brown
-emily.taylor@example.com	$2a$10$zabcdefghijklmnopqrst	Emily	Taylor
-robert.anderson@example.com	$2a$10$uvwxyzabcdefghijklmno	Robert	Anderson
-lisa.martinez@example.com	$2a$10$nopqrstuvwxyzabcdefgh	Lisa	Martinez
-william.jackson@example.com	$2a$10$hijklmnopqrstuvwxyzab	William	Jackson
-olivia.white@example.com	$2a$10$cdefghijklmnopqrstuvw	Olivia	White
+john.doe@example.com	$2a$10$abcdefghijklmnopqrstuv
+jane.smith@example.com	$2a$10$vwxyzabcdefghijklmnopq
+mike.johnson@example.com	$2a$10$pqrstuvwxyzabcdefghij
+sarah.williams@example.com	$2a$10$jklmnopqrstuvwxyzabcd
+david.brown@example.com	$2a$10$efghijklmnopqrstuvwxy
+emily.taylor@example.com	$2a$10$zabcdefghijklmnopqrst
+robert.anderson@example.com	$2a$10$uvwxyzabcdefghijklmno
+lisa.martinez@example.com	$2a$10$nopqrstuvwxyzabcdefgh
+william.jackson@example.com	$2a$10$hijklmnopqrstuvwxyzab
+olivia.white@example.com	$2a$10$cdefghijklmnopqrstuvw
 \.
 
 --
