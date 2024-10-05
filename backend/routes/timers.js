@@ -60,21 +60,7 @@ router.post('/pause', async (req, res) => {
   let status;
   let payload;
 
-  const key = `timer:${user}:${task}:duration`;
-
-  // If duration exists, we fetch the duration so far and
-  // sum with the new duration
-  let cachedDuration = 0;
-  const cachedDurationExists = await Timer.existsInCache(key);
-  
-  if(cachedDurationExists == EXISTS)
-    cachedDuration = await Timer.getValue(key);
-
-  const startTime = await Timer.getValue(`timer:${user}:${task}:start`);
-  const duration = cachedDuration + (timestamp - startTime);
-
-  logger.info(`Timestamp: ${timestamp}`);
-  logger.info(`startTime: ${startTime}`)
+  const duration = await getDuration(user, task);
 
   try {
     await Timer.setWithExpiry(key, duration);
