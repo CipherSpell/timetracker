@@ -1,9 +1,9 @@
-import Timetracker from '../components/Timetracker'
+import Timer from "../components/timetracker/Timer";
 
 export default function Home() {
   return (
     <div className=''>
-      <Timetracker />
+      <Timer />
     </div>
   )
 }
