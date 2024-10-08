@@ -5,4 +5,5 @@
 module.exports = (app) => {
   app.use('/', require('./root'));
   app.use('/users', require('./users'));
+  app.use('/timers', require('./timers'));
 };

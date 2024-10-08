@@ -57,8 +57,8 @@ async function setWithExpiry(key, value, ttl) {
       return;
     }
     await client.set(key, JSON.stringify(value), 'EX', ttl);
-  } catch (error) {
-    logger.error(`Error in setWithExpiry: ${error}`);
+  } catch(error) {
+    throw new Error(`Error in setWithExpiry: ${error}`);
   } finally {
     releaseRedisConnection(client);
   }
@@ -71,7 +71,7 @@ async function getOrDefault(key, defaultValue) {
     const value = await client.get(key);
     return value ? JSON.parse(value) : defaultValue;
   } catch(error) {
-    logger.error(`Error in getOrDefault: ${error}`);
+    throw new Error(`Error in getOrDefault: ${error}`); 
     return defaultValue;
   } finally {
     releaseRedisConnection(client);
@@ -84,7 +84,7 @@ async function deleteKey(key) {
     client = await getRedisConnection();
     await client.del(key);
   } catch(error) {
-    logger.error(`Error in deleteKey: ${error}`);
+    throw new Error(`Error in deleteKey: ${error}`);
   } finally {
     releaseRedisConnection(client);
   }
@@ -96,7 +96,7 @@ async function setKey(key, value) {
     client = await getRedisConnection();
     await client.set(key, JSON.stringify(value));
   } catch(error) {
-    logger.error(`Error in setKey: ${error}`);
+   throw new Error(`Error in setKey: ${error}`);
   } finally {
     releaseRedisConnection(client);
   }
@@ -113,7 +113,7 @@ async function exec(command) {
     const result = await client[cmd](...args);
     return result;
   } catch(error) {
-    logger.error(`Error in exec: ${error}`);
+    throw new Error(`Error in exec: ${error}`);
   } finally {
     releaseRedisConnection(client);
   }

@@ -1,0 +1,12 @@
+name: pause timer
+method: POST
+url: http://localhost:8080/timers/pause
+body:
+  content: |-
+    {
+      "user": 10,
+      "task": 1055822
+    }
+headers:
+- name: Content-Type
+  value: application/json
