@@ -5,26 +5,18 @@ import Timer from './Timer'
 import Stopwatch from './Stopwatch'
 
 const Timetracker = () => {
-  const [activeComponent, setActiveComponent] = useState<'Timer' | 'Stopwatch'>(
-    'Timer'
-  )
+  const [activeComponent, setActiveComponent] = useState<string>('')
 
-  const showComponent = (component: 'Timer' | 'Stopwatch') => {
-    setActiveComponent(component)
+  const handleActiveComponent = (data: string) => {
+    setActiveComponent(data)
   }
 
   return (
     <div>
       {activeComponent === 'Timer' ? (
-        <div>
-          <Timer />
-          <button onClick={() => showComponent('Stopwatch')}>Stopwatch</button>
-        </div>
+        <Timer sendActiveComponent={handleActiveComponent} />
       ) : (
-        <div>
-          <Stopwatch />
-          <button onClick={() => showComponent('Timer')}>Timer</button>
-        </div>
+        <Stopwatch sendActiveComponent={handleActiveComponent} />
       )}
     </div>
   )

@@ -2,10 +2,23 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 
-const Stopwatch: React.FC = () => {
+interface StopwatchProps {
+  sendActiveComponent: (data: string) => void
+}
+
+const Stopwatch: React.FC<StopwatchProps> = ({ sendActiveComponent }) => {
   const [started, setStarted] = useState<boolean>(false)
   const [time, setTime] = useState<number>(0)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const [currentComponent] = useState<string>('Timer')
+
+  const handleStart = () => {
+    setStarted(!started)
+  }
+
+  const sendData = () => {
+    sendActiveComponent(currentComponent)
+  }
 
   useEffect(() => {
     if (started) {
@@ -20,10 +33,6 @@ const Stopwatch: React.FC = () => {
       if (timerRef.current) clearInterval(timerRef.current)
     }
   }, [started])
-
-  const handleStart = () => {
-    setStarted(!started)
-  }
 
   const formatTime = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60)
@@ -46,6 +55,12 @@ const Stopwatch: React.FC = () => {
           onClick={() => handleStart()}
         >
           {started ? 'Pause' : 'Start'}
+        </button>
+        <button
+          className='bg-blue-300 rounded-md w-full text-sm py-1'
+          onClick={sendData}
+        >
+          Toggle
         </button>
       </div>
     </div>

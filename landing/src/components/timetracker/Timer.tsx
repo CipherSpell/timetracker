@@ -2,16 +2,21 @@
 
 import { useEffect, useState } from 'react'
 
-// interface TimerProps {
-//   minutes?: number
-// }
+interface TimerProps {
+  sendActiveComponent: (data: string) => void
+}
 
-const Timer: React.FC = () => {
+const Timer: React.FC<TimerProps> = ({ sendActiveComponent }) => {
   const [started, setStarted] = useState<boolean>(false)
   const [time, setTime] = useState<number>(30 * 60)
+  const [currentComponent] = useState<string>('Stopwatch')
 
-  const handleClick = () => {
+  const handleStart = () => {
     setStarted(!started)
+  }
+
+  const sendData = () => {
+    sendActiveComponent(currentComponent)
   }
 
   useEffect(() => {
@@ -46,9 +51,15 @@ const Timer: React.FC = () => {
               ? 'bg-red-300 rounded-md w-full text-sm py-1'
               : 'bg-blue-300 rounded-md w-full text-sm py-1'
           }
-          onClick={() => handleClick()}
+          onClick={() => handleStart()}
         >
           {started ? 'Pause' : 'Start'}
+        </button>
+        <button
+          className='bg-blue-300 rounded-md w-full text-sm py-1'
+          onClick={sendData}
+        >
+          Toggle
         </button>
       </div>
     </div>
