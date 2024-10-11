@@ -25,6 +25,8 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "3000:${LANDING_PORT}"
+    volumes:
+      - ./landing:/app
     environment:
       - BACKEND_HOST=backend
     depends_on:
