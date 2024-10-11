@@ -48,6 +48,4 @@ async function redisHealthCheck() {
 
 redisHealthCheck();
 
-logger.info('Changed again');
-
 module.exports = app
