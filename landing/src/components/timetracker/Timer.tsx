@@ -59,7 +59,7 @@ const Timer: React.FC<TimerProps> = ({ sendActiveComponent }) => {
           className='bg-blue-300 rounded-md w-full text-sm py-1'
           onClick={sendData}
         >
-          Toggle
+          Stopwatch
         </button>
       </div>
     </div>
