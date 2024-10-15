@@ -1,0 +1,10 @@
+{
+  "timetracker": "Timetracker",
+  "email_address": "Email address",
+  "password": "Password",
+  "sign_in": "Sign In",
+  "sign_up": "Sign Up",
+  "already_created": "Already have an account? Login",
+  "start": "Start",
+  "pause": "Pause"
+}
