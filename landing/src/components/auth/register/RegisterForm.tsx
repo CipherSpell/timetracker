@@ -8,6 +8,7 @@ import { Input } from '../../Input'
 import Link from 'next/link'
 import { createUser, State } from './RegisterActions'
 import { useFormState } from 'react-dom'
+import text from '@/src/utils/text.json'
 
 interface FormData {
   email: string
@@ -53,11 +54,13 @@ export const RegistrationForm: React.FC = () => {
   return (
     <div className='bg-black grid place-items-center h-screen'>
       <div className='rounded-lg bg-stone-900 px-10 py-10 w-96'>
-        <h2 className='text-white text-center text-2xl mb-12'>Timetracker</h2>
+        <h2 className='text-white text-center text-2xl mb-12'>
+          {text.timetracker}
+        </h2>
         <form action={formAction}>
           <div>
             <label className='text-white mb-2 block text-sm leading-none'>
-              Email address
+              {text.email_address}
             </label>
             {emailErrors}
             <Input
@@ -75,7 +78,7 @@ export const RegistrationForm: React.FC = () => {
           </div>
           <div>
             <label className='text-white mb-2 block text-sm leading-none'>
-              Password
+              {text.password}
             </label>
             <Input
               id='password'
@@ -96,7 +99,7 @@ export const RegistrationForm: React.FC = () => {
               className='bg-white rounded-md w-full text-sm py-1'
               type='submit'
             >
-              Sign Up
+              {text.sign_up}
             </button>
           </div>
         </form>
@@ -104,7 +107,7 @@ export const RegistrationForm: React.FC = () => {
         <hr className='border-subtle my-8' />
         <Link href='/login'>
           <button className='bg-white rounded-md w-full text-sm py-1'>
-            Already have an account? Login
+            {text.already_created}
           </button>
         </Link>
       </div>
