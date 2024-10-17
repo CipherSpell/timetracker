@@ -48,6 +48,4 @@ async function redisHealthCheck() {
 
 redisHealthCheck();
 
-redis.setWithExpiry('timer', '23', 1000);
-
 module.exports = app

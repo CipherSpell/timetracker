@@ -2,11 +2,12 @@ services:
   backend:
     container_name: backend
     build:
-      context: ./backend 
-      dockerfile: Dockerfile 
+      context: ./backend
+      dockerfile: Dockerfile.dev
     ports:
       - "8080:8080"
-    # TODO: Replace the hardcoded values with values from .env
+    volumes:
+      - ./backend:/app
     environment:
       - POSTGRES_HOST=${POSTGRES_HOST}
       - POSTGRES_USER=${POSTGRES_USER}
@@ -21,9 +22,11 @@ services:
     container_name: landing
     build:
       context: ./landing 
-      dockerfile: Dockerfile 
+      dockerfile: Dockerfile.dev
     ports:
       - "3000:${LANDING_PORT}"
+    volumes:
+      - ./landing:/app
     environment:
       - BACKEND_HOST=backend
     depends_on:
