@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
           <h2 className='font-bold text-2xl'>Timetracker</h2>
           <p className='text-sm mt-4'>Copyright &#169; 2024 Timetracker</p>
           <p className='text-sm mt-4 mb-6'>All rights reserved</p>
-          <button className='focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-400 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center'>
+          <button className='focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 cursor-pointer hover:bg-gray-300 rounded-full flex items-center justify-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               x='0px'
