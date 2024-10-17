@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { Button } from './ui/Button'
 
 interface TimerProps {
   minutes?: number
@@ -40,16 +41,12 @@ const Timetracker: React.FC<TimerProps> = () => {
     <div className='flex flex-col min-h-screen justify-center items-center'>
       <div className='text-9xl mb-8'>{formatTime(time)}</div>
       <div className='w-20'>
-        <button
-          className={
-            started
-              ? 'bg-red-300 rounded-md w-full text-sm py-1'
-              : 'bg-blue-300 rounded-md w-full text-sm py-1'
-          }
+        <Button
+          variant={started ? '' : 'primary'}
           onClick={() => handleClick()}
         >
           {started ? 'Pause' : 'Start'}
-        </button>
+        </Button>
       </div>
     </div>
   )

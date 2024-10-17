@@ -17,8 +17,8 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       className={
         variant === 'primary'
-          ? 'rounded-full bg-blue-200 p-3 px-6 text-xs hover:bg-blue-300'
-          : 'rounded-full bg-blue-400 p-3 px-6 text-xs hover:bg-blue-500'
+          ? 'rounded-full bg-blue-200 w-full py-2 text-xs hover:bg-blue-300 font-bold text-black'
+          : 'rounded-full bg-red-300 w-full py-2 text-xs hover:bg-red-500 font-bold text-black'
       }
       type={type}
       onClick={onClick}
