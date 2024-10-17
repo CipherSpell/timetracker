@@ -3,15 +3,20 @@
 import { useEffect, useState } from 'react'
 
 interface TimerProps {
-  minutes?: number
+  sendActiveComponent: (data: string) => void
 }
 
-const Timetracker: React.FC<TimerProps> = () => {
+const Timer: React.FC<TimerProps> = ({ sendActiveComponent }) => {
   const [started, setStarted] = useState<boolean>(false)
   const [time, setTime] = useState<number>(30 * 60)
+  const [currentComponent] = useState<string>('Stopwatch')
 
-  const handleClick = () => {
+  const handleStart = () => {
     setStarted(!started)
+  }
+
+  const sendData = () => {
+    sendActiveComponent(currentComponent)
   }
 
   useEffect(() => {
@@ -46,13 +51,19 @@ const Timetracker: React.FC<TimerProps> = () => {
               ? 'bg-red-300 rounded-md w-full text-sm py-1'
               : 'bg-blue-300 rounded-md w-full text-sm py-1'
           }
-          onClick={() => handleClick()}
+          onClick={() => handleStart()}
         >
           {started ? 'Pause' : 'Start'}
+        </button>
+        <button
+          className='bg-blue-300 rounded-md w-full text-sm py-1'
+          onClick={sendData}
+        >
+          Stopwatch
         </button>
       </div>
     </div>
   )
 }
 
-export default Timetracker
+export default Timer

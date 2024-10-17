@@ -4,5 +4,6 @@
   "jsxSingleQuote": true,
   "tabWidth": 2,
   "useTabs": false,
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "editor.formatOnSave": true
 }
