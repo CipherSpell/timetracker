@@ -1,5 +1,3 @@
-import { Input } from './Input'
-
 const Footer: React.FC = () => {
   return (
     <footer className='w-full h-auto container p-2'>
@@ -50,44 +48,10 @@ const Footer: React.FC = () => {
         </div>
         <div className='lg:block hidden'>
           <h2 className='font-bold mb-2'>Contact Us</h2>
-          <label htmlFor='email' hidden>
-            email
-          </label>
-          <Input id='email' name='email' placeholder='Enter email' />
-          <label htmlFor='message' hidden>
-            Message
-          </label>
-          <textarea
-            id='message'
-            rows={3}
-            className='w-full rounded-md text-sm px-3 py-2 mb-4'
-            name='message'
-            placeholder='message'
-          ></textarea>
-          <button className='bg-blue-300 rounded-md w-full text-sm py-1'>
-            Submit
-          </button>
         </div>
       </div>
       <div className='lg:hidden'>
         <h2 className='font-bold mt-10 text-xl mb-2'>Contact Us</h2>
-        <label htmlFor='email' hidden>
-          email
-        </label>
-        <Input id='email' name='email' placeholder='Enter email' />
-        <label htmlFor='message' hidden>
-          Message
-        </label>
-        <textarea
-          id='message'
-          rows={3}
-          className='w-full rounded-md text-sm px-3 py-2 mb-4'
-          name='message'
-          placeholder='message'
-        ></textarea>
-        <button className='bg-blue-300 rounded-md w-full text-sm py-1'>
-          Submit
-        </button>
       </div>
     </footer>
   )
