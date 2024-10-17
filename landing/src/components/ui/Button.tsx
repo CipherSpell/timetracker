@@ -7,6 +7,8 @@ interface ButtonProps {
   onClick?: MouseEventHandler<HTMLElement>
 }
 
+//TODO: Revisit the styling
+
 export const Button: React.FC<ButtonProps> = ({
   children,
   variant,
