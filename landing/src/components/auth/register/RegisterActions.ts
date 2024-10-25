@@ -1,6 +1,7 @@
 'use server'
 
 import { userSchema } from '@/src/config/zod'
+import { redirect } from 'next/navigation'
 
 export type State = {
   errors: {
@@ -37,4 +38,5 @@ export const createUser = async (prevState: any, formData: FormData) => {
   } catch (error) {
     console.error(error)
   }
+  redirect('/login')
 }
