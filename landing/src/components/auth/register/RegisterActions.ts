@@ -23,5 +23,18 @@ export const createUser = async (prevState: any, formData: FormData) => {
     }
   }
 
-  // TODO: make request to backend 
+  try {
+    await fetch('http://backend:8080/users/addUser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: formData.get('email'),
+        password: formData.get('password'),
+      }),
+    })
+  } catch (error) {
+    console.error(error)
+  }
 }
