@@ -5,7 +5,7 @@ const addUser = async (email, password) => {
   const cmd = `INSERT INTO Users (email, password)
                VALUES ($1, $2)`;
 
-  const params = [email, password, firstName, lastName];
+  const params = [email, password];
 
   try {
     await pg.withTransaction(async (client) => {
