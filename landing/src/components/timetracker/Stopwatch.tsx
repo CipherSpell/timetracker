@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
+import { Button } from '../ui/Button'
 
 interface StopwatchProps {
   sendActiveComponent: (data: string) => void
@@ -46,22 +47,15 @@ const Stopwatch: React.FC<StopwatchProps> = ({ sendActiveComponent }) => {
     <div className='flex flex-col min-h-screen justify-center items-center'>
       <div className='text-9xl mb-8'>{formatTime(time)}</div>
       <div className='w-20'>
-        <button
-          className={
-            started
-              ? 'bg-red-300 rounded-md w-full text-sm py-1'
-              : 'bg-blue-300 rounded-md w-full text-sm py-1'
-          }
+        <Button
+          variant={!started ? 'primary' : ''}
           onClick={() => handleStart()}
         >
           {started ? 'Pause' : 'Start'}
-        </button>
-        <button
-          className='bg-blue-300 rounded-md w-full text-sm py-1'
-          onClick={sendData}
-        >
+        </Button>
+        <Button variant='primary' onClick={sendData}>
           Timer
-        </button>
+        </Button>
       </div>
     </div>
   )
