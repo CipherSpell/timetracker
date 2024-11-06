@@ -25,7 +25,8 @@ export const createUser = async (prevState: any, formData: FormData) => {
   }
 
   try {
-    await fetch('http://backend:8080/users/addUser', {
+    const backendHost = process.env.BACKEND_HOST || 'http://backend:8080'
+    await fetch( `${backendHost}/users/addUser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
