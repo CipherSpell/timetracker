@@ -1,26 +1,17 @@
 const router = require('express').Router();
-const winston = require('winston');
+const logger = require('../utilities/logger');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const auth_utils = require('../utilities/auth.utils');
 
 // TODO: remove default once https://github.com/CipherSpell/timetracker/issues/14 is done 
-const JWT_SECRET = process.env.JWT_SECRET | 'PLACEHOLDER'
-
-const logger = winston.createLogger({
-  level: 'info',
-  format: winston.format.combine(
-    winston.format.colorize(),
-    winston.format.simple()
-  ),
-  transports: [new winston.transports.Console()],
-});
+const JWT_SECRET = process.env.JWT_SECRET || 'PLACEHOLDER'
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await User.getUserByEmail(email);
-  if(!user || await auth_utils.validatePassword(password, user.password)) {
+  const user = await User.getUserbyEmail(email);
+  if(!user || !(await auth_utils.validatePassword(password, user.password))) {
       return res
               .status(401)
               .json({ message: 'Invalid credentials' });
@@ -35,3 +26,5 @@ router.post('/login', async (req, res) => {
 
   res.json({ token });
 })
+
+module.exports = router;

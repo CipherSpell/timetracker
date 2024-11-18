@@ -1,6 +1,6 @@
-name: add user
+name: login
 method: POST
-url: http://localhost:8080/users/addUser
+url: http://localhost:8080/auth/login
 body:
   content: |-
     {
