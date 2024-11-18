@@ -4,7 +4,6 @@ const { authenticateJWT } = require('../middlewares/auth.mw');
 const logger = require('../utilities/logger');
 
 const EXISTS = 1;
-const NOT_EXISTS = 0;
 
 const getDuration = async (user, task) => {
   const durationKey = `timer:${user}:${task}:duration`;
