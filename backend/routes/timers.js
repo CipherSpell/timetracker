@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Timer = require('../models/Timer');
-
+const { authenticateJWT } = require('../middlewares/auth.mw');
 const logger = require('../utilities/logger');
 
 const EXISTS = 1;
@@ -25,13 +25,13 @@ const getDuration = async (user, task) => {
 
   return [durationKey, duration];
 };
-router.get('/', async (req, res) => {
+router.get('/', authenticateJWT, async (req, res) => {
   let payload = await Timer.exec('keys *');
   res.status(200).send({ payload });
 });
 
 // Returns a task/timer id
-router.post('/start', async (req, res) => {
+router.post('/start', authenticateJWT, async (req, res) => {
   const { user } = req.body;
   const timestamp = Date.now();
 
@@ -54,7 +54,7 @@ router.post('/start', async (req, res) => {
   res.status(status).send({ payload });
 });
 
-router.post('/pause', async (req, res) => {
+router.post('/pause', authenticateJWT, async (req, res) => {
   const { task, user } = req.body;
   const timestamp = Date.now();
   
@@ -90,7 +90,7 @@ router.post('/pause', async (req, res) => {
  *  "user": 5
  * }
  */
-router.post('/stop', async (req, res) => {
+router.post('/stop', authenticateJWT, async (req, res) => {
   const { task, user } = req.body;
   const timestamp = Date.now();
 
@@ -113,7 +113,7 @@ router.post('/stop', async (req, res) => {
   res.sendStatus(200);
 })
 
-router.get('/getTimerValue/:user/:task/:type', async (req, res) => {
+router.get('/getTimerValue/:user/:task/:type', authenticateJWT, async (req, res) => {
   const { user, task, type } = req.params;
   const key = `timer:${user}:${task}:${type}`;
 

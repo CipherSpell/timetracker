@@ -1,74 +1,61 @@
 const pg = require('../database/postgres');
-const logger = require('../utilities/logger')
+const logger = require('../utilities/logger');
 
-const addUser = async (email, password) => {
+const addUser = async (email, hashedPassword) => {
   const cmd = `INSERT INTO Users (email, password)
-               VALUES ($1, $2)`;
+               VALUES ($1, $2)
+               RETURNING id, email, created_at, updated_at`;
 
-  const params = [email, password];
+  const params = [email, hashedPassword];
 
   try {
-    await pg.withTransaction(async (client) => {
-      await client.query(cmd, params);
-    });
+    const result = await pg.executeQuery(cmd, params);
+    return result.rows[0];
   } catch(error) {
-    logger.log({
-      level: 'error',
-      message: error
-    });
+    logger.error(`Error adding user: ${error}`);
+    throw error;
   }
-}
+};
 
 const getUserbyId = async (userId) => {
   const cmd = `SELECT * FROM Users WHERE id = $1`;
-  let result;
-
+  
   try {
-    result = await pg.executeQuery(cmd, [userId]);
+    const result = await pg.executeQuery(cmd, [userId]);
+    return result.rows[0] || null;
   } catch(error) {
-     logger.log({
-      level: 'error',
-      message: error
-    });
+    logger.error(`Error fetching user by ID: ${error}`);
+    throw error;
   }
-
-  return result;
-}
+};
 
 const getUserbyEmail = async (email) => {
-  const cmd = `SELECT * from Users WHERE email = $1`;
-  let result;
-
+  const cmd = `SELECT * FROM Users WHERE email = $1`;
+  
   try {
-    result = await pg.executeQuery(cmd, [email]);
+    const result = await pg.executeQuery(cmd, [email]);
+    return result.rows[0] || null;
   } catch(error) {
-    logger.log({
-      level: 'error',
-      message: error
-    });
+    logger.error(`Error fetching user by email: ${error}`);
+    throw error;
   }
-}
+};
 
 const getAllUsers = async () => {
-  let result;
-
+  const cmd = `SELECT id, email, created_at, updated_at FROM Users;`;
+  
   try {
-    result = await pg.executeQuery(
-      `SELECT * FROM users;`
-    );
+    const result = await pg.executeQuery(cmd);
+    return result.rows;
   } catch(error) {
-    logger.log({
-      level: 'error',
-      message: error
-    });
+    logger.error(`Error fetching all users: ${error}`);
+    throw error;
   }
-
-  return result;
-}
+};
 
 module.exports = {
   addUser,
   getAllUsers,
   getUserbyId,
   getUserbyEmail
-}
+};

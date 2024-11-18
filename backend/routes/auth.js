@@ -20,7 +20,7 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.getUserByEmail(email);
-  if(!user || auth_utils.validatePassword(password, user.password)) {
+  if(!user || await auth_utils.validatePassword(password, user.password)) {
       return res
               .status(401)
               .json({ message: 'Invalid credentials' });

@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const winston = require('winston');
 
 const logger = winston.createLogger({
@@ -10,13 +10,26 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-export const validatePassword = async (userInput, storedPw) => {
+const validatePassword = async (userInput, storedPw) => {
   try {
     return await bcrypt.compare(userInput, storedPw);
   } catch(error) {
-    logger.log({
-      level: 'error',
-      message: error
-    })
+    logger.error(`Error validating password: ${error}`);
+    return false;
   }
+}
+
+const hashPassword = async (password) => {
+  try {
+    const saltRounds = 10;
+    return await bcrypt.hash(password, saltRounds);
+  } catch(error) {
+    logger.error(`Error hashing password: ${error}`);
+    throw error;
+  }
+}
+
+module.exports = {
+  validatePassword,
+  hashPassword,
 }
