@@ -4,8 +4,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const auth_utils = require('../utilities/auth.utils');
 
-// TODO: remove default once https://github.com/CipherSpell/timetracker/issues/14 is done 
-const JWT_SECRET = process.env.JWT_SECRET || 'PLACEHOLDER'
+const JWT_SECRET = process.env.JWT_SECRET || 'PLACEHOLDER';
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
