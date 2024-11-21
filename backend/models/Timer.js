@@ -21,7 +21,7 @@ const getValue = async (key) => {
     logger.error(error);
   }
 
-  return result;
+  return result.rows[0];
 }
 
 const delKey = async (key) => {
@@ -49,7 +49,7 @@ const exec = async (command) => {
     logger.error(error);
   }
 
-  return result;
+  return result.rows[0];
 }
 
 const existsInCache = async (key) => {
@@ -61,7 +61,7 @@ const existsInCache = async (key) => {
     logger.error(error);
   }
 
-  return result;
+  return result.rows[0];
 }
 
 const saveTimer = async (timer, userId) => {

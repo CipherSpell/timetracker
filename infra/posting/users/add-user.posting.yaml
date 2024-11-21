@@ -1,0 +1,12 @@
+name: add user
+method: POST
+url: http://localhost:8080/users/addUser
+body:
+  content: |-
+    {
+      "email": "test@test.com",
+      "password": "test123"
+    }
+headers:
+- name: Content-Type
+  value: application/json
