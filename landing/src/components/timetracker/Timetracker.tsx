@@ -1,23 +1,27 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Timer from './Timer'
-import Stopwatch from './Stopwatch'
+// import Stopwatch from './Stopwatch'
 
 const Timetracker = () => {
-  const [activeComponent, setActiveComponent] = useState<string>('')
+  // const [activeComponent, setActiveComponent] = useState<string>('')
 
-  const handleActiveComponent = (data: string) => {
-    setActiveComponent(data)
-  }
+  // const handleActiveComponent = (data: string) => {
+  //   setActiveComponent(data)
+  // }
 
   return (
+    // TODO: Uncomment when we figure out component swapping without the warning
+    // <div>
+    //   {activeComponent === 'Timer' ? (
+    //     <Timer sendActiveComponent={handleActiveComponent} />
+    //   ) : (
+    //     <Stopwatch sendActiveComponent={handleActiveComponent} />
+    //   )}
+    // </div>
     <div>
-      {activeComponent === 'Timer' ? (
-        <Timer sendActiveComponent={handleActiveComponent} />
-      ) : (
-        <Stopwatch sendActiveComponent={handleActiveComponent} />
-      )}
+      <Timer />
     </div>
   )
 }
