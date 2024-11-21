@@ -2,8 +2,8 @@
 
 export const startTimer = async () => {
   try {
-    // const backendHost = process.env.BACKEND_HOST || 'http://backend:8080'
-    await fetch(`http://localhost:8080/timers/start`, {
+    const backendHost = process.env.BACKEND_HOST || 'http://backend:8080'
+    await fetch(`${backendHost}/timers/start`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
