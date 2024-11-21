@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Button } from '../ui/Button'
+import { pauseTimer, startTimer } from './TimerActions'
 
 // TODO: Pass sendActiveComponent as props when we figure out component swapping without the warning in the browser
 
@@ -15,7 +16,14 @@ const Timer: React.FC = () => {
   // const [currentComponent] = useState<string>('Stopwatch')
 
   const handleStart = () => {
-    setStarted(!started)
+    // setStarted(!started)
+    if (started) {
+      pauseTimer()
+      setStarted(false)
+    } else {
+      startTimer()
+      setStarted(true)
+    }
   }
 
   // const sendData = () => {
