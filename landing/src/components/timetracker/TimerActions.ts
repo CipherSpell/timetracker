@@ -30,7 +30,6 @@ export const stopTimer = async () => {
 }
 
 export const pauseTimer = async () => {
-  console.log('timer paused false')
   try {
     const backendHost = process.env.BACKEND_HOST || 'http://backend:8080'
     await fetch(`${backendHost}/timers/pause`, {
