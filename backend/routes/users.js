@@ -1,18 +1,18 @@
-const router = require("express").Router();
-const { authenticateJWT } = require("../middlewares/auth.mw");
-const User = require("../models/User");
-const logger = require("../utilities/logger");
-const jwt = require("jsonwebtoken");
-const auth_utils = require("../utilities/auth.utils");
+const router = require('express').Router();
+const { authenticateJWT } = require('../middlewares/auth.mw');
+const User = require('../models/User');
+const logger = require('../utilities/logger');
+const jwt = require('jsonwebtoken');
+const auth_utils = require('../utilities/auth.utils');
 
-const JWT_SECRET = process.env.JWT_SECRET || "PLACEHOLDER";
+const JWT_SECRET = process.env.JWT_SECRET || 'PLACEHOLDER';
 
-router.get("/", authenticateJWT, async (req, res) => {
+router.get('/', authenticateJWT, async (req, res) => {
   let result = await User.getAllUsers();
   res.status(200).send(result);
 });
 
-router.post("/addUser", async (req, res) => {
+router.post('/addUser', async (req, res) => {
   const { email, password } = req.body;
   const regexPassword =
     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-+_!@#$%^&*., ?])/;
@@ -20,13 +20,13 @@ router.post("/addUser", async (req, res) => {
   try {
     const existingUser = await User.getUserbyEmail(email);
     if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({ message: 'User already exists' });
     }
 
     if (!regexPassword.test(password)) {
       return res.status(400).json({
         message:
-          "Password must be at least 8 characters and contain a special character",
+          'Password must be at least 8 characters and contain a special character',
       });
     }
 
@@ -42,16 +42,16 @@ router.post("/addUser", async (req, res) => {
       email: newUser.email,
     };
 
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "24h" });
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' });
 
     res.status(201).json({ token });
   } catch (error) {
     logger.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
-router.get("/getUser/:email", authenticateJWT, async (req, res) => {
+router.get('/getUser/:email', authenticateJWT, async (req, res) => {
   const { email } = req.params;
 
   try {
@@ -59,7 +59,7 @@ router.get("/getUser/:email", authenticateJWT, async (req, res) => {
     res.status(200).send(result);
   } catch (error) {
     logger.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
