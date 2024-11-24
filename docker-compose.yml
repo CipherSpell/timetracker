@@ -21,14 +21,14 @@ services:
   landing:
     container_name: landing
     build:
-      context: ./landing 
+      context: ./landing
       dockerfile: Dockerfile.dev
     ports:
       - "3000:${LANDING_PORT}"
     volumes:
       - ./landing:/app
     environment:
-      - BACKEND_HOST=backend
+      - BACKEND_HOST=${BACKEND_HOST}
     depends_on:
       - backend
 
@@ -48,9 +48,8 @@ services:
     ports:
       - "5432:${POSTGRES_PORT}"
     volumes:
-      - postgres_data:/var/lib/postgresql/data 
+      - postgres_data:/var/lib/postgresql/data
       - ./infra/sql/dump.sql:/docker-entrypoint-initdb.d/dump.sql # Auto-import the .sql dump file
-
 
   redis:
     image: redis:7.4-alpine
