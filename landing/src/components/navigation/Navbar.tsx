@@ -1,20 +1,35 @@
+'use client'
+
 import text from '@/src/utils/text.json'
 import NavLink from './NavLink'
+import { useState } from 'react'
 
 const Navbar: React.FC = () => {
-  //TODO: Add conditional when user is logged in/logged out. Should likely do it via state and lifting state up or via context hook
+  //TODO: Make the navbar active to keep track of current route. Might need to use Router hook to achieve this.
+
+  //TODO: Modify authentication/authorization checks once login changes are merged
+  const [isLoggedIn] = useState(false)
+  const authLinks = !isLoggedIn ? (
+    <div className='flex justify-end'>
+      <NavLink href='/login'>{text.sign_in}</NavLink>
+      <NavLink href='/register'>{text.sign_up}</NavLink>
+    </div>
+  ) : (
+    <div className='flex justify-end'>
+      {/*TODO: Changed href when a sign out route is implemented */}
+      <NavLink href={'/'}>{text.sign_out}</NavLink>
+    </div>
+  )
+
   return (
     <div className='flex px-2 h-20 bg-black text-white items-center justify-between'>
       <div className='flex items-center'>
-        <h1 className='flex h-fit items-center cursor-default select-none pr-10 pl-5'>
+        <h1 className='flex h-fit items-center cursor-default select-none pr-10 pl-5 font-bold'>
           {text.timetracker}
         </h1>
-        <NavLink href={'/'}>Home</NavLink>
+        <NavLink href={'/'}>{text.home}</NavLink>
       </div>
-      <div className='flex justify-end items-center'>
-        <NavLink href='/login'>{text.sign_in}</NavLink>
-        <NavLink href='/register'>{text.sign_up}</NavLink>
-      </div>
+      {authLinks}
     </div>
   )
 }

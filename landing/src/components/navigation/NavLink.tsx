@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { ReactNode } from 'react'
+import { UrlObject } from 'url'
 
 type NavProps = {
-  href: string
+  href: string | UrlObject
   children?: ReactNode
 }
 
