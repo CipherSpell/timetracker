@@ -4,10 +4,10 @@ import { UrlObject } from 'url'
 
 interface NavProps {
   href: string | UrlObject
-  children?: ReactNode
+  children: ReactNode
 }
 
-const Navlink: React.FC<NavProps> = ({ href, children }: NavProps) => {
+const Navlink: React.FC<NavProps> = ({ href, children }) => {
   return (
     <Link className='mx-5 my-2 hover:underline' href={href}>
       {children}

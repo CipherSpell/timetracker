@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
   )
 
   return (
-    <div className='flex px-2 h-20 bg-black text-white items-center justify-between'>
+    <nav className='flex px-2 h-20 bg-black text-white items-center justify-between'>
       <div className='flex'>
         <NavLink href={'/'}>
           <h1 className='flex h-fit items-center cursor-pointer select-none pr-10 pl-5 font-bold'>
@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
         </NavLink>
       </div>
       {authLinks}
-    </div>
+    </nav>
   )
 }
 
