@@ -2,9 +2,11 @@
   "timetracker": "Timetracker",
   "email_address": "Email address",
   "password": "Password",
+  "home": "Home",
   "sign_in": "Sign In",
   "sign_up": "Sign Up",
   "already_created": "Already have an account? Login",
   "start": "Start",
-  "pause": "Pause"
+  "pause": "Pause",
+  "sign_out": "Sign Out"
 }
