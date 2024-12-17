@@ -29,6 +29,7 @@ const Navbar: React.FC = () => {
             {text.timetracker}
           </h1>
         </NavLink>
+        <NavLink href={'/reports'}>Reports</NavLink>
       </div>
       {authLinks}
     </nav>
