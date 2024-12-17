@@ -3,11 +3,11 @@
 import { useRouter } from 'next/navigation'
 import React, { ReactNode, useEffect, useRef } from 'react'
 
-interface props {
+interface ModalProps {
   children: ReactNode
 }
 
-const Modal: React.FC<props> = ({ children }) => {
+const Modal: React.FC<ModalProps> = ({ children }) => {
   const router = useRouter()
   const dialogRef = useRef<React.ElementRef<'dialog'>>(null)
 
@@ -24,7 +24,7 @@ const Modal: React.FC<props> = ({ children }) => {
       ref={dialogRef}
       onClick={closeModal}
       onClose={router.back}
-      className='backdrop:bg/black backdrop:backdrop-blur-sm text-3xl'
+      className='backdrop:bg/black backdrop:backdrop-blur-sm rounded-md text-3xl w-full max-w-[700px] p-5'
     >
       <div>{children}</div>
     </dialog>
