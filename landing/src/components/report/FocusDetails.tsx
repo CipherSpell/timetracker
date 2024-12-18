@@ -2,6 +2,7 @@ import React from 'react'
 import ReportHeader from './ReportHeader'
 import text from '@/src/utils/text.json'
 
+//TODO: remove dummy data below after fetching data from backend. Fetch data via server action
 const focusData = [
   {
     date: '16-Dec-2024',
