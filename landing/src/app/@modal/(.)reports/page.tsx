@@ -1,12 +1,15 @@
 import FocusDetails from '@/src/components/report/FocusDetails'
 import Modal from '@/src/components/ui/Modal'
-import React from 'react'
+import React, { Suspense } from 'react'
+import ModalLoading from './loading'
 
 const ReportsModal = async () => {
   return (
-    <Modal>
-      <FocusDetails />
-    </Modal>
+    <Suspense fallback={<ModalLoading />}>
+      <Modal>
+        <FocusDetails />
+      </Modal>
+    </Suspense>
   )
 }
 

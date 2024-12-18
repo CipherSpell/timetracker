@@ -9,7 +9,7 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ children }) => {
   const router = useRouter()
-  const dialogRef = useRef<React.ElementRef<'dialog'>>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null)
 
   useEffect(() => {
     dialogRef.current?.showModal()

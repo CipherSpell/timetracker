@@ -1,5 +1,6 @@
 import React from 'react'
 import ReportHeader from './ReportHeader'
+import text from '@/src/utils/text.json'
 
 const focusData = [
   {
@@ -23,15 +24,17 @@ const focusData = [
 ]
 
 const FocusDetails: React.FC = () => {
+  const { date, category, duration } = text.FocusDetails
+
   return (
     <div>
       <ReportHeader title='Focus Time Details' />
       <table className='table-fixed text-sm w-full'>
         <thead>
           <tr className='border-b'>
-            <th>DATE</th>
-            <th>TASK/CATEGORY</th>
-            <th>DURATION (HH:SS)</th>
+            <th>{date}</th>
+            <th>{category}</th>
+            <th>{duration}</th>
           </tr>
         </thead>
         <tbody className='text-center'>

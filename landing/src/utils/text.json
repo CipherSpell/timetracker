@@ -8,5 +8,10 @@
   "already_created": "Already have an account? Login",
   "start": "Start",
   "pause": "Pause",
-  "sign_out": "Sign Out"
+  "sign_out": "Sign Out",
+  "FocusDetails": {
+    "date": "date",
+    "category": "task/category",
+    "duration": "duration (HH:MM)"
+  }
 }
