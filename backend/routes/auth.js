@@ -10,20 +10,18 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.getUserbyEmail(email);
-  if(!user || !(await auth_utils.validatePassword(password, user.password))) {
-      return res
-              .status(401)
-              .json({ message: 'Invalid credentials' });
+  if (!user || !(await auth_utils.validatePassword(password, user.password))) {
+    return res.status(401).json({ message: 'Invalid credentials' });
   }
 
   const payload = {
     id: user.id,
-    email: user.email
+    email: user.email,
   };
 
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' });
 
   res.json({ token });
-})
+});
 
 module.exports = router;

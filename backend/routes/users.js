@@ -13,12 +13,21 @@ router.get('/', authenticateJWT, async (req, res) => {
 });
 
 router.post('/addUser', async (req, res) => {
-  const { email, password } = req.body; 
+  const { email, password } = req.body;
+  const regexPassword =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-+_!@#$%^&*., ?])/;
 
   try {
     const existingUser = await User.getUserbyEmail(email);
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
+    }
+
+    if (!regexPassword.test(password)) {
+      return res.status(400).json({
+        message:
+          'Password must be at least 8 characters and contain a special character',
+      });
     }
 
     const hashedPassword = await auth_utils.hashPassword(password);
@@ -48,7 +57,7 @@ router.get('/getUser/:email', authenticateJWT, async (req, res) => {
   try {
     let result = await User.getUserbyEmail(email);
     res.status(200).send(result);
-  } catch(error) {
+  } catch (error) {
     logger.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }
