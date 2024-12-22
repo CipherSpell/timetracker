@@ -1,8 +1,7 @@
 'use client'
 
 import React from 'react'
-import Timer from './Timer'
-// import Stopwatch from './Stopwatch'
+import Stopwatch from './Stopwatch'
 
 const Timetracker = () => {
   // const [activeComponent, setActiveComponent] = useState<string>('')
@@ -21,7 +20,7 @@ const Timetracker = () => {
     //   )}
     // </div>
     <div>
-      <Timer />
+      <Stopwatch />
     </div>
   )
 }

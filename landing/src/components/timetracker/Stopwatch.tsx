@@ -3,23 +3,23 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Button } from '../ui/Button'
 
-interface StopwatchProps {
-  sendActiveComponent: (data: string) => void
-}
+// interface StopwatchProps {
+//   sendActiveComponent: (data: string) => void
+// }
 
-const Stopwatch: React.FC<StopwatchProps> = ({ sendActiveComponent }) => {
+const Stopwatch: React.FC = () => {
   const [started, setStarted] = useState<boolean>(false)
   const [time, setTime] = useState<number>(0)
   const timerRef = useRef<NodeJS.Timeout | null>(null)
-  const [currentComponent] = useState<string>('Timer')
+  // const [currentComponent] = useState<string>('Timer')
 
   const handleStart = () => {
     setStarted(!started)
   }
 
-  const sendData = () => {
-    sendActiveComponent(currentComponent)
-  }
+  // const sendData = () => {
+  //   sendActiveComponent(currentComponent)
+  // }
 
   useEffect(() => {
     if (started) {
@@ -53,9 +53,9 @@ const Stopwatch: React.FC<StopwatchProps> = ({ sendActiveComponent }) => {
         >
           {started ? 'Pause' : 'Start'}
         </Button>
-        <Button variant='primary' onClick={sendData}>
+        {/* <Button variant='primary' onClick={sendData}>
           Timer
-        </Button>
+        </Button> */}
       </div>
     </div>
   )
