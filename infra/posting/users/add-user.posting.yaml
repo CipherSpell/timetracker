@@ -4,8 +4,8 @@ url: http://localhost:8080/users/addUser
 body:
   content: |-
     {
-      "email": "test@test.com",
-      "password": "test123"
+      "email": "user@test.com",
+      "password": "Test!12345678"
     }
 headers:
 - name: Content-Type
