@@ -12,7 +12,7 @@ interface InputProps {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Input: React.FC<InputProps> = ({
+export const Input = ({
   id,
   name,
   type,
@@ -20,7 +20,7 @@ export const Input: React.FC<InputProps> = ({
   placeholder,
   onChange,
   required,
-}) => {
+}: InputProps) => {
   return (
     <input
       id={id}

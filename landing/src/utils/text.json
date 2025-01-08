@@ -8,5 +8,11 @@
   "already_created": "Already have an account? Login",
   "start": "Start",
   "pause": "Pause",
-  "sign_out": "Sign Out"
+  "sign_out": "Sign Out",
+  "all_rights_reserved": "All rights reserved",
+  "support": "Support",
+  "tos": "Terms of Services",
+  "privacy_policy": "Privacy Policy",
+  "community": "Community",
+  "contact_us": "Contact Us"
 }

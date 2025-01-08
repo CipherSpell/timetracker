@@ -7,7 +7,7 @@ interface NavProps {
   children: ReactNode
 }
 
-const Navlink: React.FC<NavProps> = ({ href, children }) => {
+const Navlink = ({ href, children }: NavProps) => {
   return (
     <Link className='mx-5 my-2 hover:underline' href={href}>
       {children}

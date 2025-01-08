@@ -1,3 +1,5 @@
+import text from '../utils/text.json'
+
 const Footer: React.FC = () => {
   return (
     <footer className='w-full h-auto container p-2'>
@@ -9,9 +11,9 @@ const Footer: React.FC = () => {
       </a>
       <div className='grid grid-cols-3 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 md:gap-8'>
         <div>
-          <h2 className='font-bold text-2xl'>Timetracker</h2>
+          <h2 className='font-bold text-2xl'>{text.timetracker}</h2>
           <p className='text-sm mt-4'>Copyright &#169; 2024 Timetracker</p>
-          <p className='text-sm mt-4 mb-6'>All rights reserved</p>
+          <p className='text-sm mt-4 mb-6'>{text.all_rights_reserved}</p>
           <button className='focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 cursor-pointer hover:bg-gray-300 rounded-full flex items-center justify-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -29,29 +31,29 @@ const Footer: React.FC = () => {
           </button>
         </div>
         <div className='flex flex-col'>
-          <h2 className='font-bold'>Support</h2>
+          <h2 className='font-bold'>{text.support}</h2>
           <a
             className='hover:underline hover:text-gray-500 leading-4 cursor-pointer mt-6'
             href='/terms-of-service'
           >
-            Terms of Services
+            {text.tos}
           </a>
           <a
             className='hover:underline hover:text-gray-500 leading-4 cursor-pointer mt-6'
             href='/privacy'
           >
-            Privacy Policy
+            {text.privacy_policy}
           </a>
         </div>
         <div>
-          <h2 className='font-bold'>Community</h2>
+          <h2 className='font-bold'>{text.community}</h2>
         </div>
         <div className='lg:block hidden'>
-          <h2 className='font-bold mb-2'>Contact Us</h2>
+          <h2 className='font-bold mb-2'>{text.contact_us}</h2>
         </div>
       </div>
       <div className='lg:hidden'>
-        <h2 className='font-bold mt-10 text-xl mb-2'>Contact Us</h2>
+        <h2 className='font-bold mt-10 text-xl mb-2'>{text.contact_us}</h2>
       </div>
     </footer>
   )
