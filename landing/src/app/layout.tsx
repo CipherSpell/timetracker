@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal,
 }: Readonly<{
   children: React.ReactNode
   modal: React.ReactNode
@@ -18,7 +17,6 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={'container mx-auto'}>
-        {modal}
         <Navbar />
         <div>{children}</div>
         <Footer />
