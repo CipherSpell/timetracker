@@ -7,11 +7,9 @@ interface ReportCardsProps {
 
 const ReportCards = ({ time, text }: ReportCardsProps) => {
   return (
-    <div className='mt-12'>
-      <div className='p-4 block max-w-48 bg-white border rounded-lg dark:bg-gray-900 dark:border-gray-900'>
-        <div className='mb-2 text-2xl font-bold dark:text-white'>{time}</div>
-        <p className='font-bold dark:text-white'>{text}</p>
-      </div>
+    <div className='mt-12 p-4 block max-w-48 bg-white border rounded-lg dark:bg-gray-900 dark:border-gray-900'>
+      <div className='mb-2 text-2xl font-bold dark:text-white'>{time}</div>
+      <p className='font-bold dark:text-white'>{text}</p>
     </div>
   )
 }
