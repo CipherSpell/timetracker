@@ -24,11 +24,11 @@ const focusData = [
   },
 ]
 
-const FocusDetails: React.FC = () => {
+const FocusDetails = () => {
   const { date, category, duration } = text.FocusDetails
 
   return (
-    <div>
+    <>
       <ReportHeader title='Focus Time Details' />
       <table className='table-fixed text-sm w-full'>
         <thead>
@@ -54,7 +54,7 @@ const FocusDetails: React.FC = () => {
           })}
         </tbody>
       </table>
-    </div>
+    </>
   )
 }
 

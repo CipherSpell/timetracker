@@ -2,7 +2,7 @@ interface ReportHeaderProps {
   title: string
 }
 
-const ReportHeader: React.FC<ReportHeaderProps> = ({ title }) => {
+const ReportHeader = ({ title }: ReportHeaderProps) => {
   return (
     <div className='flex items-center w-full my-5'>
       <h1 className='text-nowrap mr-2 font-bold text-lg w-fit'>{title}</h1>
