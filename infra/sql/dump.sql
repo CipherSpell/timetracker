@@ -92,6 +92,47 @@ COPY public.timers (user_id, duration, description) FROM stdin;
 \.
 
 --
+-- Name: tags; Type: TABLE; Schema: public;
+--
+
+CREATE TABLE public.tags (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES public.users(id) ON DELETE CASCADE,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, name)
+);
+
+--
+-- Name: tags; Type: TABLE DATA; Schema: public;
+--
+
+COPY public.tags (user_id, name) FROM stdin;
+1	"Work"
+1	"Personal"
+1	"Urgent"
+2	"Meeting"
+2	"Development"
+3	"Testing"
+3	"Review"
+4	"Documentation"
+4	"Deployment"
+5	"Client"
+5	"Low Priority"
+6	"Research"
+6	"Design"
+7	"Code Review"
+7	"Bug Fixes"
+8	"Marketing"
+8	"Sales"
+9	"HR"
+9	"Recruitment"
+10	"Finance"
+10	"Budgeting"
+\.
+
+--
 -- PostgreSQL database dump complete
 --
 
