@@ -1,0 +1,6 @@
+name: delete tag
+method: DELETE
+url: http://localhost:8080/tags/22
+headers:
+- name: Authorization
+  value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImVtYWlsIjoidXNlckB0ZXN0LmNvbSIsImlhdCI6MTczNjkyODc5NSwiZXhwIjoxNzM3MDE1MTk1fQ.9mJeKXekMjPb5SIRjamzQvrGgPNTEo9a7IXlycR1MtM
