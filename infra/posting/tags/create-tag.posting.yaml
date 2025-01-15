@@ -1,0 +1,13 @@
+name: create tag
+method: POST
+url: http://localhost:8080/tags
+body:
+  content: |-
+    {
+      "name": "TestTag"
+    }
+headers:
+- name: Authorization
+  value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImVtYWlsIjoidXNlckB0ZXN0LmNvbSIsImlhdCI6MTczNjkyODQ2MywiZXhwIjoxNzM3MDE0ODYzfQ.tYX6a2scytZYhYpVNvrnB8Zt6V-VnJPusBeCflXO0TU
+- name: Content-Type
+  value: application/json
