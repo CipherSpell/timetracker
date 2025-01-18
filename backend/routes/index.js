@@ -8,4 +8,5 @@ module.exports = (app) => {
   app.use('/timers', require('./timers'));
   app.use('/auth', require('./auth'));
   app.use('/tags', require('./tags'));
+  app.use('/health', require('./health'));
 };

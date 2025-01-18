@@ -119,11 +119,20 @@ async function exec(command) {
   }
 }
 
+function releaseRedisConnection(client) {
+  if (client) {
+    redisPool.release(client).catch((err) => {
+      logger.error(`Error releasing Redis client back to pool: ${err}`);
+    });
+  }
+}
+
 module.exports = {
   setWithExpiry,
   getOrDefault,
   deleteKey,
   setKey,
   exec,
-  getRedisConnection
+  getRedisConnection,
+  releaseRedisConnection
 };
